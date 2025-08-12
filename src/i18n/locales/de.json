@@ -1,0 +1,89 @@
+{
+  "title": "Immobilieninvestitions-Rechner",
+  "subtitle": "Berechnen Sie Ihre Immobilieninvestitionsrenditen mit detaillierter Finanzanalyse",
+  "propertyDetails": "Immobiliendetails",
+  "loanParameters": "Darlehensparameter",
+  "taxSettings": "Steuereinstellungen",
+  "growthAssumptions": "Wachstumsannahmen",
+  "results": "Ergebnisse",
+  "charts": "Diagramme",
+  "yearlyBreakdown": "Jährliche Aufschlüsselung",
+  "keyMetrics": "Kennzahlen",
+  
+  "purchasePrice": "Kaufpreis",
+  "purchasePriceUnit": "€",
+  "area": "Fläche",
+  "areaUnit": "m²",
+  "region": "Region/Bezirk",
+  "energyEfficiency": "Energieeffizienzklasse",
+  "coldRent": "Kaltmiete",
+  "coldRentUnit": "€/Monat",
+  "warmRent": "Warmmiete",
+  "warmRentUnit": "€/Monat",
+  "additionalExpenses": "Zusätzliche Eigentümerkosten",
+  "additionalExpensesUnit": "€/Monat",
+  "purchaseDate": "Kaufdatum",
+  
+  "loanAmount": "Darlehenssumme",
+  "loanAmountUnit": "€",
+  "interestRate": "Zinssatz",
+  "interestRateUnit": "%",
+  "repaymentRate": "Tilgungsrate",
+  "repaymentRateUnit": "%",
+  "loanTerm": "Darlehenslaufzeit",
+  "loanTermUnit": "Jahre",
+  
+  "afaRate": "AfA-Satz (Abschreibung)",
+  "afaRateUnit": "%",
+  "specialAmortization": "Sonderabschreibung",
+  "specialAmortizationUnit": "%",
+  "specialAmortizationYears": "Sonderabschreibungsjahre",
+  "marginalTaxRate": "Grenzsteuersatz",
+  "marginalTaxRateUnit": "%",
+  
+  "rentGrowthRate": "Mietsteigerungsrate",
+  "rentGrowthRateUnit": "% pro Jahr",
+  "propertyGrowthRate": "Immobilienwert-Steigerungsrate",
+  "propertyGrowthRateUnit": "% pro Jahr",
+  
+  "year": "Jahr",
+  "monthlyPayment": "Monatliche Rate",
+  "remainingLoan": "Restschuld",
+  "rentalIncome": "Mieteinnahmen",
+  "propertyValue": "Immobilienwert",
+  "taxBenefit": "Steuervorteil",
+  "cashFlow": "Cashflow",
+  "cumulativeCashFlow": "Kumulativer Cashflow",
+  
+  "totalReturn": "Gesamtrendite",
+  "irr": "IRR (Interner Zinsfuß)",
+  "totalCashFlow": "Gesamt-Cashflow",
+  "finalPropertyValue": "Endwert der Immobilie",
+  "totalInterestPaid": "Gezahlte Zinsen gesamt",
+  "totalTaxBenefits": "Steuervorteile gesamt",
+  
+  "capitalGrowth": "Kapitalwachstum",
+  "loanReduction": "Darlehenstilgung",
+  "annualCashFlows": "Jährliche Cashflows",
+  "cumulativeReturns": "Kumulative Renditen",
+  
+  "calculate": "Berechnen",
+  "reset": "Zurücksetzen",
+  "export": "Exportieren",
+  "import": "Importieren",
+  
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "positive": "Wert muss positiv sein",
+    "percentage": "Wert muss zwischen 0 und 100 liegen",
+    "maxPercentage": "Wert kann nicht über 100% liegen"
+  },
+  
+  "tooltips": {
+    "coldRent": "Monatliche Miete ohne Nebenkosten (Kaltmiete)",
+    "warmRent": "Monatliche Miete inklusive Nebenkosten (Warmmiete)",
+    "afaRate": "Jährlicher Abschreibungssatz für Steuerzwecke. Standard: 2% (50 Jahre), Altbauten (vor 1925): 2,5%, Neubauten (nach 2023): 3%",
+    "specialAmortization": "Zusätzliche beschleunigte Abschreibung für Energieeffizienz oder Förderprogramme",
+    "marginalTaxRate": "Ihr höchster Steuersatz zur Berechnung der Steuervorteile"
+  }
+}

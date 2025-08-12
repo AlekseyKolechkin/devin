@@ -1,0 +1,89 @@
+{
+  "title": "Real Estate Investment Calculator",
+  "subtitle": "Calculate your property investment returns with detailed financial analysis",
+  "propertyDetails": "Property Details",
+  "loanParameters": "Loan Parameters",
+  "taxSettings": "Tax Settings",
+  "growthAssumptions": "Growth Assumptions",
+  "results": "Results",
+  "charts": "Charts",
+  "yearlyBreakdown": "Yearly Breakdown",
+  "keyMetrics": "Key Metrics",
+  
+  "purchasePrice": "Purchase Price",
+  "purchasePriceUnit": "€",
+  "area": "Area",
+  "areaUnit": "m²",
+  "region": "Region/District",
+  "energyEfficiency": "Energy Efficiency Class",
+  "coldRent": "Cold Rent (Kaltmiete)",
+  "coldRentUnit": "€/month",
+  "warmRent": "Warm Rent (Warmmiete)",
+  "warmRentUnit": "€/month",
+  "additionalExpenses": "Additional Owner Expenses",
+  "additionalExpensesUnit": "€/month",
+  "purchaseDate": "Purchase Date",
+  
+  "loanAmount": "Loan Amount",
+  "loanAmountUnit": "€",
+  "interestRate": "Interest Rate",
+  "interestRateUnit": "%",
+  "repaymentRate": "Repayment Rate",
+  "repaymentRateUnit": "%",
+  "loanTerm": "Loan Term",
+  "loanTermUnit": "years",
+  
+  "afaRate": "AfA Rate (Depreciation)",
+  "afaRateUnit": "%",
+  "specialAmortization": "Special Amortization",
+  "specialAmortizationUnit": "%",
+  "specialAmortizationYears": "Special Amortization Years",
+  "marginalTaxRate": "Marginal Tax Rate",
+  "marginalTaxRateUnit": "%",
+  
+  "rentGrowthRate": "Rent Growth Rate",
+  "rentGrowthRateUnit": "% per year",
+  "propertyGrowthRate": "Property Value Growth Rate",
+  "propertyGrowthRateUnit": "% per year",
+  
+  "year": "Year",
+  "monthlyPayment": "Monthly Payment",
+  "remainingLoan": "Remaining Loan",
+  "rentalIncome": "Rental Income",
+  "propertyValue": "Property Value",
+  "taxBenefit": "Tax Benefit",
+  "cashFlow": "Cash Flow",
+  "cumulativeCashFlow": "Cumulative Cash Flow",
+  
+  "totalReturn": "Total Return",
+  "irr": "IRR (Internal Rate of Return)",
+  "totalCashFlow": "Total Cash Flow",
+  "finalPropertyValue": "Final Property Value",
+  "totalInterestPaid": "Total Interest Paid",
+  "totalTaxBenefits": "Total Tax Benefits",
+  
+  "capitalGrowth": "Capital Growth",
+  "loanReduction": "Loan Reduction",
+  "annualCashFlows": "Annual Cash Flows",
+  "cumulativeReturns": "Cumulative Returns",
+  
+  "calculate": "Calculate",
+  "reset": "Reset",
+  "export": "Export",
+  "import": "Import",
+  
+  "validation": {
+    "required": "This field is required",
+    "positive": "Value must be positive",
+    "percentage": "Value must be between 0 and 100",
+    "maxPercentage": "Value cannot exceed 100%"
+  },
+  
+  "tooltips": {
+    "coldRent": "Monthly rent without utilities (Kaltmiete)",
+    "warmRent": "Monthly rent including utilities (Warmmiete)",
+    "afaRate": "Annual depreciation rate for tax purposes. Standard: 2% (50 years), Old buildings (pre-1925): 2.5%, New buildings (post-2023): 3%",
+    "specialAmortization": "Additional accelerated depreciation for energy efficiency or government programs",
+    "marginalTaxRate": "Your highest tax bracket rate for calculating tax benefits"
+  }
+}

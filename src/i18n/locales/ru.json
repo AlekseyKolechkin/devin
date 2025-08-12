@@ -1,0 +1,89 @@
+{
+  "title": "Калькулятор инвестиций в недвижимость",
+  "subtitle": "Рассчитайте доходность ваших инвестиций в недвижимость с детальным финансовым анализом",
+  "propertyDetails": "Параметры недвижимости",
+  "loanParameters": "Параметры кредита",
+  "taxSettings": "Налоговые настройки",
+  "growthAssumptions": "Предположения о росте",
+  "results": "Результаты",
+  "charts": "Графики",
+  "yearlyBreakdown": "Разбивка по годам",
+  "keyMetrics": "Ключевые показатели",
+  
+  "purchasePrice": "Цена покупки",
+  "purchasePriceUnit": "€",
+  "area": "Площадь",
+  "areaUnit": "м²",
+  "region": "Регион/Район",
+  "energyEfficiency": "Класс энергоэффективности",
+  "coldRent": "Холодная аренда (Kaltmiete)",
+  "coldRentUnit": "€/месяц",
+  "warmRent": "Теплая аренда (Warmmiete)",
+  "warmRentUnit": "€/месяц",
+  "additionalExpenses": "Дополнительные расходы владельца",
+  "additionalExpensesUnit": "€/месяц",
+  "purchaseDate": "Дата покупки",
+  
+  "loanAmount": "Сумма кредита",
+  "loanAmountUnit": "€",
+  "interestRate": "Процентная ставка",
+  "interestRateUnit": "%",
+  "repaymentRate": "Ставка погашения",
+  "repaymentRateUnit": "%",
+  "loanTerm": "Срок кредита",
+  "loanTermUnit": "лет",
+  
+  "afaRate": "Ставка AfA (амортизация)",
+  "afaRateUnit": "%",
+  "specialAmortization": "Специальная амортизация",
+  "specialAmortizationUnit": "%",
+  "specialAmortizationYears": "Годы специальной амортизации",
+  "marginalTaxRate": "Предельная налоговая ставка",
+  "marginalTaxRateUnit": "%",
+  
+  "rentGrowthRate": "Темп роста арендной платы",
+  "rentGrowthRateUnit": "% в год",
+  "propertyGrowthRate": "Темп роста стоимости недвижимости",
+  "propertyGrowthRateUnit": "% в год",
+  
+  "year": "Год",
+  "monthlyPayment": "Ежемесячный платеж",
+  "remainingLoan": "Остаток кредита",
+  "rentalIncome": "Доход от аренды",
+  "propertyValue": "Стоимость недвижимости",
+  "taxBenefit": "Налоговая льгота",
+  "cashFlow": "Денежный поток",
+  "cumulativeCashFlow": "Накопленный денежный поток",
+  
+  "totalReturn": "Общая доходность",
+  "irr": "IRR (внутренняя норма доходности)",
+  "totalCashFlow": "Общий денежный поток",
+  "finalPropertyValue": "Итоговая стоимость недвижимости",
+  "totalInterestPaid": "Общая сумма процентов",
+  "totalTaxBenefits": "Общие налоговые льготы",
+  
+  "capitalGrowth": "Рост капитала",
+  "loanReduction": "Погашение кредита",
+  "annualCashFlows": "Годовые денежные потоки",
+  "cumulativeReturns": "Накопленная доходность",
+  
+  "calculate": "Рассчитать",
+  "reset": "Сбросить",
+  "export": "Экспорт",
+  "import": "Импорт",
+  
+  "validation": {
+    "required": "Это поле обязательно",
+    "positive": "Значение должно быть положительным",
+    "percentage": "Значение должно быть от 0 до 100",
+    "maxPercentage": "Значение не может превышать 100%"
+  },
+  
+  "tooltips": {
+    "coldRent": "Ежемесячная арендная плата без коммунальных услуг (Kaltmiete)",
+    "warmRent": "Ежемесячная арендная плата включая коммунальные услуги (Warmmiete)",
+    "afaRate": "Годовая норма амортизации для налоговых целей. Стандарт: 2% (50 лет), Старые здания (до 1925): 2.5%, Новые здания (после 2023): 3%",
+    "specialAmortization": "Дополнительная ускоренная амортизация для энергоэффективности или государственных программ",
+    "marginalTaxRate": "Ваша максимальная налоговая ставка для расчета налоговых льгот"
+  }
+}
