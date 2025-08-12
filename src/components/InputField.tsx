@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import InfoTooltip from './InfoTooltip';
 
 interface InputFieldProps {
   id: string;
@@ -14,6 +15,7 @@ interface InputFieldProps {
   max?: number;
   step?: number;
   tooltip?: string;
+  info?: string;
   required?: boolean;
   className?: string;
 }
@@ -29,6 +31,7 @@ export default function InputField({
   max,
   step,
   tooltip,
+  info,
   required = false,
   className = ''
 }: InputFieldProps) {
@@ -41,10 +44,13 @@ export default function InputField({
 
   return (
     <div className={`space-y-2 ${className}`}>
-      <Label htmlFor={id} className="text-sm font-medium">
-        {t(label)}
-        {required && <span className="text-red-500 ml-1">*</span>}
-        {unit && <span className="text-gray-500 ml-1">({t(unit)})</span>}
+      <Label htmlFor={id} className="text-sm font-medium flex items-center gap-2">
+        <span>
+          {t(label)}
+          {required && <span className="text-red-500 ml-1">*</span>}
+          {unit && <span className="text-gray-500 ml-1">({t(unit)})</span>}
+        </span>
+        {info && <InfoTooltip content={info} />}
       </Label>
       <Input
         id={id}

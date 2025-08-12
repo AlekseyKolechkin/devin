@@ -2,16 +2,19 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { Checkbox } from './ui/checkbox';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { PropertyInputs, ResultsData } from '../types/financial';
 import { calculateResults, formatCurrency, formatPercentage, formatNumber } from '../utils/calculations';
 import InputField from './InputField';
+import EnergyEfficiencySlider from './EnergyEfficiencySlider';
+import RegionSelect from './RegionSelect';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const defaultInputs: PropertyInputs = {
   purchasePrice: 300000,
   area: 80,
-  region: 'Berlin',
+  region: 'Mitte',
   energyEfficiency: 'C',
   coldRent: 1200,
   warmRent: 1400,
@@ -26,7 +29,12 @@ const defaultInputs: PropertyInputs = {
   marginalTaxRate: 42,
   rentGrowthRate: 2.0,
   propertyGrowthRate: 2.5,
-  purchaseDate: new Date().toISOString().split('T')[0]
+  purchaseDate: new Date().toISOString().split('T')[0],
+  hasKfwLoan: false,
+  kfwLoanAmount: 0,
+  kfwInterestRate: 1.5,
+  kfwRepaymentRate: 2.0,
+  kfwLoanTerm: 20
 };
 
 export default function FinancialDashboard() {
@@ -63,7 +71,7 @@ export default function FinancialDashboard() {
     return () => clearTimeout(timer);
   }, [inputs]);
 
-  const updateInput = (field: keyof PropertyInputs, value: number | string) => {
+  const updateInput = (field: keyof PropertyInputs, value: number | string | boolean) => {
     setInputs(prev => ({ ...prev, [field]: value }));
   };
 
@@ -149,6 +157,7 @@ export default function FinancialDashboard() {
                   min={0}
                   step={1000}
                   required
+                  info="tooltips.purchasePrice"
                 />
                 <InputField
                   id="area"
@@ -158,20 +167,15 @@ export default function FinancialDashboard() {
                   unit="areaUnit"
                   min={0}
                   step={1}
+                  info="tooltips.area"
                 />
-                <InputField
-                  id="region"
-                  label="region"
+                <RegionSelect
                   value={inputs.region}
-                  onChange={(value) => updateInput('region', value as string)}
-                  type="text"
+                  onChange={(value: string) => updateInput('region', value)}
                 />
-                <InputField
-                  id="energyEfficiency"
-                  label="energyEfficiency"
+                <EnergyEfficiencySlider
                   value={inputs.energyEfficiency}
-                  onChange={(value) => updateInput('energyEfficiency', value as string)}
-                  type="text"
+                  onChange={(value: string) => updateInput('energyEfficiency', value)}
                 />
                 <InputField
                   id="coldRent"
@@ -182,6 +186,7 @@ export default function FinancialDashboard() {
                   min={0}
                   step={50}
                   tooltip="tooltips.coldRent"
+                  info="tooltips.coldRent"
                 />
                 <InputField
                   id="warmRent"
@@ -192,6 +197,7 @@ export default function FinancialDashboard() {
                   min={0}
                   step={50}
                   tooltip="tooltips.warmRent"
+                  info="tooltips.warmRent"
                 />
                 <InputField
                   id="additionalExpenses"
@@ -201,6 +207,7 @@ export default function FinancialDashboard() {
                   unit="additionalExpensesUnit"
                   min={0}
                   step={10}
+                  info="tooltips.additionalExpenses"
                 />
                 <InputField
                   id="purchaseDate"
@@ -227,6 +234,7 @@ export default function FinancialDashboard() {
                   min={0}
                   step={1000}
                   required
+                  info="tooltips.loanAmount"
                 />
                 <InputField
                   id="interestRate"
@@ -238,6 +246,7 @@ export default function FinancialDashboard() {
                   max={20}
                   step={0.1}
                   required
+                  info="tooltips.interestRate"
                 />
                 <InputField
                   id="repaymentRate"
@@ -249,6 +258,7 @@ export default function FinancialDashboard() {
                   max={10}
                   step={0.1}
                   required
+                  info="tooltips.repaymentRate"
                 />
                 <InputField
                   id="loanTerm"
@@ -260,7 +270,67 @@ export default function FinancialDashboard() {
                   max={50}
                   step={1}
                   required
+                  info="tooltips.loanTerm"
                 />
+                
+                <div className="flex items-center space-x-2 pt-4 border-t">
+                  <Checkbox
+                    id="hasKfwLoan"
+                    checked={inputs.hasKfwLoan}
+                    onCheckedChange={(checked) => updateInput('hasKfwLoan', checked)}
+                  />
+                  <label htmlFor="hasKfwLoan" className="text-sm font-medium cursor-pointer">
+                    {t('hasKfwLoan')}
+                  </label>
+                </div>
+                
+                {inputs.hasKfwLoan && (
+                  <div className="space-y-4 pl-6 border-l-2 border-blue-200">
+                    <InputField
+                      id="kfwLoanAmount"
+                      label="kfwLoanAmount"
+                      value={inputs.kfwLoanAmount}
+                      onChange={(value) => updateInput('kfwLoanAmount', value as number)}
+                      unit="kfwLoanAmountUnit"
+                      min={0}
+                      step={1000}
+                      info="tooltips.kfwLoanAmount"
+                    />
+                    <InputField
+                      id="kfwInterestRate"
+                      label="kfwInterestRate"
+                      value={inputs.kfwInterestRate}
+                      onChange={(value) => updateInput('kfwInterestRate', value as number)}
+                      unit="kfwInterestRateUnit"
+                      min={0}
+                      max={10}
+                      step={0.1}
+                      info="tooltips.kfwInterestRate"
+                    />
+                    <InputField
+                      id="kfwRepaymentRate"
+                      label="kfwRepaymentRate"
+                      value={inputs.kfwRepaymentRate}
+                      onChange={(value) => updateInput('kfwRepaymentRate', value as number)}
+                      unit="kfwRepaymentRateUnit"
+                      min={0}
+                      max={10}
+                      step={0.1}
+                      info="tooltips.kfwRepaymentRate"
+                    />
+                    <InputField
+                      id="kfwLoanTerm"
+                      label="kfwLoanTerm"
+                      value={inputs.kfwLoanTerm}
+                      onChange={(value) => updateInput('kfwLoanTerm', value as number)}
+                      unit="kfwLoanTermUnit"
+                      min={1}
+                      max={50}
+                      step={1}
+                      info="tooltips.kfwLoanTerm"
+                    />
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -280,6 +350,7 @@ export default function FinancialDashboard() {
                   max={10}
                   step={0.1}
                   tooltip="tooltips.afaRate"
+                  info="tooltips.afaRate"
                 />
                 <InputField
                   id="specialAmortization"
@@ -291,6 +362,7 @@ export default function FinancialDashboard() {
                   max={20}
                   step={0.1}
                   tooltip="tooltips.specialAmortization"
+                  info="tooltips.specialAmortization"
                 />
                 <InputField
                   id="specialAmortizationYears"
@@ -300,6 +372,7 @@ export default function FinancialDashboard() {
                   min={0}
                   max={20}
                   step={1}
+                  info="tooltips.specialAmortizationYears"
                 />
                 <InputField
                   id="marginalTaxRate"
@@ -311,6 +384,7 @@ export default function FinancialDashboard() {
                   max={50}
                   step={1}
                   tooltip="tooltips.marginalTaxRate"
+                  info="tooltips.marginalTaxRate"
                 />
               </CardContent>
             </Card>
@@ -330,6 +404,7 @@ export default function FinancialDashboard() {
                   min={0}
                   max={10}
                   step={0.1}
+                  info="tooltips.rentGrowthRate"
                 />
                 <InputField
                   id="propertyGrowthRate"
@@ -340,6 +415,7 @@ export default function FinancialDashboard() {
                   min={0}
                   max={10}
                   step={0.1}
+                  info="tooltips.propertyGrowthRate"
                 />
               </CardContent>
             </Card>
@@ -421,6 +497,49 @@ export default function FinancialDashboard() {
                         </div>
                         <div className="text-sm text-gray-600 dark:text-gray-300">
                           {t('totalTaxBenefits')}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Mortgage Indicators */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{t('mortgageIndicators')}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                          {formatCurrency(results.mortgageIndicators.totalLoanAmount, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('totalLoanAmount')}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                          {formatCurrency(results.mortgageIndicators.monthlyPayment, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('monthlyPayment')}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-rose-50 dark:bg-rose-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-rose-600 dark:text-rose-400">
+                          {formatCurrency(results.mortgageIndicators.totalInterestPaid, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('totalInterestPaid')}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+                          {formatCurrency(results.mortgageIndicators.interestPaid10Years, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('interestPaid10Years')}
                         </div>
                       </div>
                     </div>

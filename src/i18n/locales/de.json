@@ -79,11 +79,70 @@
     "maxPercentage": "Wert kann nicht über 100% liegen"
   },
   
+  "hasKfwLoan": "Mit KfW",
+  "kfwLoanAmount": "KfW-Darlehenssumme",
+  "kfwLoanAmountUnit": "€",
+  "kfwInterestRate": "KfW-Zinssatz",
+  "kfwInterestRateUnit": "%",
+  "kfwRepaymentRate": "KfW-Tilgungsrate",
+  "kfwRepaymentRateUnit": "%",
+  "kfwLoanTerm": "KfW-Darlehenslaufzeit",
+  "kfwLoanTermUnit": "Jahre",
+  
+  "mortgageIndicators": "Hypotheken-Kennzahlen",
+  "totalLoanAmount": "Gesamtdarlehenssumme",
+  "monthlyPayment": "Monatliche Rate",
+  "interestPaid10Years": "Zinsen (10 Jahre)",
+  
+  "energyEfficiencyOptions": {
+    "A+": "A+",
+    "A": "A",
+    "B": "B", 
+    "C": "C",
+    "D": "D",
+    "E": "E",
+    "F": "F",
+    "G": "G",
+    "H": "H"
+  },
+  
+  "berlinDistricts": {
+    "Mitte": "Mitte",
+    "Friedrichshain-Kreuzberg": "Friedrichshain-Kreuzberg",
+    "Pankow": "Pankow",
+    "Charlottenburg-Wilmersdorf": "Charlottenburg-Wilmersdorf",
+    "Spandau": "Spandau",
+    "Steglitz-Zehlendorf": "Steglitz-Zehlendorf",
+    "Tempelhof-Schöneberg": "Tempelhof-Schöneberg",
+    "Neukölln": "Neukölln",
+    "Treptow-Köpenick": "Treptow-Köpenick",
+    "Marzahn-Hellersdorf": "Marzahn-Hellersdorf",
+    "Lichtenberg": "Lichtenberg",
+    "Reinickendorf": "Reinickendorf"
+  },
+
   "tooltips": {
     "coldRent": "Monatliche Miete ohne Nebenkosten (Kaltmiete)",
     "warmRent": "Monatliche Miete inklusive Nebenkosten (Warmmiete)",
     "afaRate": "Jährlicher Abschreibungssatz für Steuerzwecke. Standard: 2% (50 Jahre), Altbauten (vor 1925): 2,5%, Neubauten (nach 2023): 3%",
     "specialAmortization": "Zusätzliche beschleunigte Abschreibung für Energieeffizienz oder Förderprogramme",
-    "marginalTaxRate": "Ihr höchster Steuersatz zur Berechnung der Steuervorteile"
+    "marginalTaxRate": "Ihr höchster Steuersatz zur Berechnung der Steuervorteile",
+    "purchasePrice": "Gesamtkaufpreis der Immobilie inklusive aller Erwerbsnebenkosten",
+    "area": "Wohnfläche der Immobilie in Quadratmetern",
+    "region": "Wählen Sie den Berliner Bezirk, in dem sich die Immobilie befindet. Verschiedene Bezirke können unterschiedliche Marktbedingungen haben",
+    "energyEfficiency": "Energieeffizienzklasse von A+ (sehr effizient) bis H (wenig effizient). Bessere Effizienz kann für Sonderfinanzierungen qualifizieren",
+    "additionalExpenses": "Monatliche Eigentümerkosten wie Hausverwaltung, Instandhaltungsrücklage, Versicherung, etc.",
+    "loanAmount": "Hauptdarlehenssumme der Bank. Sollte 80-90% des Kaufpreises nicht überschreiten",
+    "interestRate": "Jährlicher Zinssatz für das Hauptdarlehen. Aktuelle Marktzinsen liegen zwischen 3-5%",
+    "repaymentRate": "Jährliche Tilgungsrate. Höhere Raten bedeuten schnellere Entschuldung aber höhere monatliche Belastung",
+    "loanTerm": "Darlehenslaufzeit in Jahren. Übliche Laufzeiten sind 20-30 Jahre",
+    "hasKfwLoan": "KfW bietet Förderdarlehen für energieeffiziente Immobilien und Sanierungen mit günstigen Konditionen",
+    "kfwLoanAmount": "Höhe des KfW-Förderdarlehens. Dies kommt zusätzlich zu Ihrem Bankdarlehen",
+    "kfwInterestRate": "KfW-Zinssatz ist typischerweise niedriger als Marktzinsen, oft 1-3%",
+    "kfwRepaymentRate": "KfW-Tilgungsrate, oft mit anfänglichen tilgungsfreien Jahren",
+    "kfwLoanTerm": "KfW-Darlehenslaufzeit, typischerweise 10-30 Jahre je nach Programm",
+    "specialAmortizationYears": "Anzahl Jahre für Sonderabschreibung. Meist auf die ersten Jahre begrenzt",
+    "rentGrowthRate": "Erwartete jährliche Mietsteigerung. Historischer Durchschnitt in Deutschland ist 2-3%",
+    "propertyGrowthRate": "Erwartete jährliche Wertsteigerung der Immobilie. Langfristiger Durchschnitt in deutschen Städten ist 2-4%"
   }
 }

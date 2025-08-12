@@ -17,6 +17,11 @@ export interface PropertyInputs {
   rentGrowthRate: number;
   propertyGrowthRate: number;
   purchaseDate: string;
+  hasKfwLoan: boolean;
+  kfwLoanAmount: number;
+  kfwInterestRate: number;
+  kfwRepaymentRate: number;
+  kfwLoanTerm: number;
 }
 
 export interface YearlyResults {
@@ -33,6 +38,24 @@ export interface YearlyResults {
   repaymentAmount: number;
 }
 
+export interface MortgageIndicators {
+  totalLoanAmount: number;
+  monthlyPayment: number;
+  totalInterestPaid: number;
+  interestPaid10Years: number;
+}
+
+export interface EnergyEfficiencyOption {
+  value: string;
+  label: string;
+  color: string;
+}
+
+export interface RegionOption {
+  value: string;
+  label: string;
+}
+
 export interface ResultsData {
   yearlyResults: YearlyResults[];
   totalReturn: number;
@@ -41,6 +64,7 @@ export interface ResultsData {
   finalPropertyValue: number;
   totalInterestPaid: number;
   totalTaxBenefits: number;
+  mortgageIndicators: MortgageIndicators;
 }
 
 export interface LanguageOption {
