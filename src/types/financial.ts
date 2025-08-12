@@ -36,6 +36,13 @@ export interface YearlyResults {
   amortization: number;
   interestPayment: number;
   repaymentAmount: number;
+  operatingExpenses: number;
+  netIncomeBeforeDebt: number;
+  taxDepreciation: number;
+  taxableIncome: number;
+  taxOnRentalIncome: number;
+  equity: number;
+  roi: number;
 }
 
 export interface MortgageIndicators {

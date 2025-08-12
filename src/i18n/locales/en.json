@@ -121,6 +121,22 @@
     "Reinickendorf": "Reinickendorf"
   },
 
+  "incomeAndCashFlows": "Income and Cash Flows",
+  "debtAndCapital": "Debt and Capital",
+  "rentalIncomePerYear": "Rental Income, €/year",
+  "operatingExpensesPerYear": "Operating Expenses, €/year",
+  "netIncomeBeforeDebt": "Net Income Before Debt, €/year",
+  "taxDepreciation": "Tax Depreciation, €",
+  "taxableIncomePerYear": "Taxable Income, €/year",
+  "taxOnRentalIncome": "Tax (on rental income), €/year",
+  "netCashFlowPerYear": "Net Cash Flow, €/year",
+  "interestPaymentsPerYear": "Interest Payments, €/year",
+  "principalPaymentsPerYear": "Principal Payments, €/year",
+  "remainingDebtEndOfYear": "Remaining Debt (end of year), €",
+  "propertyValueEndOfYear": "Property Value (end of year), €",
+  "equityEndOfYear": "Equity (end of year), €",
+  "roiAccumulated": "ROI Accumulated, %",
+
   "tooltips": {
     "coldRent": "Monthly rent without utilities (Kaltmiete)",
     "warmRent": "Monthly rent including utilities (Warmmiete)",

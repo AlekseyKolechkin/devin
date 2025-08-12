@@ -121,6 +121,22 @@
     "Reinickendorf": "Райниккендорф"
   },
 
+  "incomeAndCashFlows": "Доходы и денежные потоки",
+  "debtAndCapital": "Долг и капитал",
+  "rentalIncomePerYear": "Арендный доход, €/год",
+  "operatingExpensesPerYear": "Операционные расходы, €/год",
+  "netIncomeBeforeDebt": "Чистый доход до кредита, €/год",
+  "taxDepreciation": "Налоговая амортизация, €",
+  "taxableIncomePerYear": "Налогооблагаемая прибыль, €/год",
+  "taxOnRentalIncome": "Налог (на доход от аренды), €/год",
+  "netCashFlowPerYear": "Чистый денежный поток, €/год",
+  "interestPaymentsPerYear": "Проценты по кредитам, €/год",
+  "principalPaymentsPerYear": "Погашение кредита, €/год",
+  "remainingDebtEndOfYear": "Остаток долга на конец года, €",
+  "propertyValueEndOfYear": "Стоимость недвижимости на конец года, €",
+  "equityEndOfYear": "Собственный капитал на конец года, €",
+  "roiAccumulated": "ROI накопленный, %",
+
   "tooltips": {
     "coldRent": "Ежемесячная арендная плата без коммунальных услуг (Kaltmiete)",
     "warmRent": "Ежемесячная арендная плата включая коммунальные услуги (Warmmiete)",

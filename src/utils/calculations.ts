@@ -216,18 +216,34 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     totalKfwInterestPaid += yearlyKfwInterestPayment;
     totalTaxBenefits += taxBenefit;
     
+    const operatingExpenses = additionalExpenses * 12;
+    const netIncomeBeforeDebt = annualRentalIncome - operatingExpenses;
+    const taxDepreciation = annualAfaAmount + currentSpecialAmortization;
+    const taxableIncome = netIncomeBeforeDebt - totalYearlyInterestPayment - taxDepreciation;
+    const taxOnRentalIncome = taxableIncome * (marginalTaxRate / 100);
+    const totalRemainingLoan = remainingLoan + remainingKfwLoan;
+    const equity = propertyValue - totalRemainingLoan;
+    const roi = initialInvestment > 0 ? (equity / initialInvestment) * 100 : 0;
+
     yearlyResults.push({
       year,
       monthlyPayment: totalMonthlyPayment,
-      remainingLoan: remainingLoan + remainingKfwLoan,
+      remainingLoan: totalRemainingLoan,
       rentalIncome: annualRentalIncome,
       propertyValue,
       taxBenefit,
       cashFlow,
       cumulativeCashFlow,
-      amortization: annualAfaAmount + currentSpecialAmortization,
+      amortization: taxDepreciation,
       interestPayment: totalYearlyInterestPayment,
-      repaymentAmount: yearlyPrincipalPayment + yearlyKfwPrincipalPayment
+      repaymentAmount: yearlyPrincipalPayment + yearlyKfwPrincipalPayment,
+      operatingExpenses,
+      netIncomeBeforeDebt,
+      taxDepreciation,
+      taxableIncome,
+      taxOnRentalIncome,
+      equity,
+      roi
     });
     
     cashFlows.push(cashFlow);

@@ -121,6 +121,22 @@
     "Reinickendorf": "Reinickendorf"
   },
 
+  "incomeAndCashFlows": "Einkommen und Cashflows",
+  "debtAndCapital": "Schulden und Kapital",
+  "rentalIncomePerYear": "Mieteinnahmen, €/Jahr",
+  "operatingExpensesPerYear": "Betriebskosten, €/Jahr",
+  "netIncomeBeforeDebt": "Nettoeinkommen vor Schulden, €/Jahr",
+  "taxDepreciation": "Steuerliche Abschreibung, €",
+  "taxableIncomePerYear": "Zu versteuerndes Einkommen, €/Jahr",
+  "taxOnRentalIncome": "Steuer (auf Mieteinnahmen), €/Jahr",
+  "netCashFlowPerYear": "Netto-Cashflow, €/Jahr",
+  "interestPaymentsPerYear": "Zinszahlungen, €/Jahr",
+  "principalPaymentsPerYear": "Tilgungszahlungen, €/Jahr",
+  "remainingDebtEndOfYear": "Restschuld (Jahresende), €",
+  "propertyValueEndOfYear": "Immobilienwert (Jahresende), €",
+  "equityEndOfYear": "Eigenkapital (Jahresende), €",
+  "roiAccumulated": "ROI kumuliert, %",
+
   "tooltips": {
     "coldRent": "Monatliche Miete ohne Nebenkosten (Kaltmiete)",
     "warmRent": "Monatliche Miete inklusive Nebenkosten (Warmmiete)",

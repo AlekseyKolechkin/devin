@@ -10,6 +10,7 @@ import InputField from './InputField';
 import EnergyEfficiencySlider from './EnergyEfficiencySlider';
 import RegionSelect from './RegionSelect';
 import LanguageSwitcher from './LanguageSwitcher';
+import CashFlowTable from './CashFlowTable';
 
 const defaultInputs: PropertyInputs = {
   purchasePrice: 300000,
@@ -635,6 +636,9 @@ export default function FinancialDashboard() {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Detailed Cash Flow Table */}
+                <CashFlowTable yearlyResults={results.yearlyResults} locale={locale} />
               </>
             )}
           </div>
