@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
 import { LineChart, Line, AreaChart, Area, Bar, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3 } from 'lucide-react';
 import { PropertyInputs, ResultsData } from '../types/financial';
 import { calculateResults, formatCurrency, formatPercentage, formatNumber } from '../utils/calculations';
 import InputField from './InputField';
@@ -197,7 +198,10 @@ export default function FinancialDashboard() {
             {/* Property Details */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('propertyDetails')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Home className="h-5 w-5 text-blue-600" />
+                  {t('propertyDetails')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -235,7 +239,10 @@ export default function FinancialDashboard() {
             {/* Purchase Costs */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('purchaseCosts')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Receipt className="h-5 w-5 text-orange-600" />
+                  {t('purchaseCosts')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -275,7 +282,10 @@ export default function FinancialDashboard() {
             {/* Rental Parameters */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('rentalParameters')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <DollarSign className="h-5 w-5 text-green-600" />
+                  {t('rentalParameters')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -316,7 +326,10 @@ export default function FinancialDashboard() {
             {/* Loan Parameters */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('loanParameters')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-purple-600" />
+                  {t('loanParameters')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -431,7 +444,10 @@ export default function FinancialDashboard() {
             {/* Tax Settings */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('taxSettings')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5 text-gray-600" />
+                  {t('taxSettings')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -486,7 +502,10 @@ export default function FinancialDashboard() {
             {/* Growth Assumptions */}
             <Card>
               <CardHeader>
-                <CardTitle>{t('growthAssumptions')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-emerald-600" />
+                  {t('growthAssumptions')}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <InputField
@@ -541,7 +560,10 @@ export default function FinancialDashboard() {
                 {/* Key Metrics */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>{t('keyMetrics')}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <Target className="h-5 w-5 text-red-600" />
+                      {t('keyMetrics')}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -616,7 +638,10 @@ export default function FinancialDashboard() {
                 {/* Mortgage Indicators */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>{t('mortgageIndicators')}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <Building className="h-5 w-5 text-indigo-600" />
+                      {t('mortgageIndicators')}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -659,7 +684,10 @@ export default function FinancialDashboard() {
                 {/* Charts */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>{t('charts')}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <BarChart3 className="h-5 w-5 text-violet-600" />
+                      {t('charts')}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-8">
                     {/* Capital Growth Chart */}
