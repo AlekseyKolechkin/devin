@@ -22,8 +22,7 @@
   "warmRentUnit": "€/месяц",
   "additionalExpenses": "Дополнительные расходы владельца",
   "additionalExpensesUnit": "€/месяц",
-  "purchaseDate": "Дата покупки",
-  
+
   "loanAmount": "Сумма кредита",
   "loanAmountUnit": "€",
   "interestRate": "Процентная ставка",
@@ -54,6 +53,8 @@
   "taxBenefit": "Налоговая льгота",
   "cashFlow": "Денежный поток",
   "cumulativeCashFlow": "Накопленный денежный поток",
+  "loanPayments": "Платежи по кредиту",
+  "operatingExpenses": "Операционные расходы",
   
   "totalReturn": "Общая доходность",
   "irr": "IRR (внутренняя норма доходности)",
@@ -91,7 +92,6 @@
   
   "mortgageIndicators": "Показатели ипотеки",
   "totalLoanAmount": "Общая сумма кредита",
-  "monthlyPayment": "Ежемесячный платеж",
   "interestPaid10Years": "Проценты (10 лет)",
   
   "energyEfficiencyOptions": {

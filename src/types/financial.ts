@@ -16,7 +16,6 @@ export interface PropertyInputs {
   marginalTaxRate: number;
   rentGrowthRate: number;
   propertyGrowthRate: number;
-  purchaseDate: string;
   hasKfwLoan: boolean;
   kfwLoanAmount: number;
   kfwInterestRate: number;

@@ -22,8 +22,7 @@
   "warmRentUnit": "€/month",
   "additionalExpenses": "Additional Owner Expenses",
   "additionalExpensesUnit": "€/month",
-  "purchaseDate": "Purchase Date",
-  
+
   "loanAmount": "Loan Amount",
   "loanAmountUnit": "€",
   "interestRate": "Interest Rate",
@@ -54,6 +53,8 @@
   "taxBenefit": "Tax Benefit",
   "cashFlow": "Cash Flow",
   "cumulativeCashFlow": "Cumulative Cash Flow",
+  "loanPayments": "Loan Payments",
+  "operatingExpenses": "Operating Expenses",
   
   "totalReturn": "Total Return",
   "irr": "IRR (Internal Rate of Return)",
@@ -91,7 +92,6 @@
   
   "mortgageIndicators": "Mortgage Indicators",
   "totalLoanAmount": "Total Loan Amount",
-  "monthlyPayment": "Monthly Payment",
   "interestPaid10Years": "Interest Paid (10 Years)",
   
   "energyEfficiencyOptions": {

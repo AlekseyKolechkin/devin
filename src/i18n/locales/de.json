@@ -22,8 +22,7 @@
   "warmRentUnit": "€/Monat",
   "additionalExpenses": "Zusätzliche Eigentümerkosten",
   "additionalExpensesUnit": "€/Monat",
-  "purchaseDate": "Kaufdatum",
-  
+
   "loanAmount": "Darlehenssumme",
   "loanAmountUnit": "€",
   "interestRate": "Zinssatz",
@@ -54,6 +53,8 @@
   "taxBenefit": "Steuervorteil",
   "cashFlow": "Cashflow",
   "cumulativeCashFlow": "Kumulativer Cashflow",
+  "loanPayments": "Darlehenszahlungen",
+  "operatingExpenses": "Betriebskosten",
   
   "totalReturn": "Gesamtrendite",
   "irr": "IRR (Interner Zinsfuß)",
@@ -91,7 +92,6 @@
   
   "mortgageIndicators": "Hypotheken-Kennzahlen",
   "totalLoanAmount": "Gesamtdarlehenssumme",
-  "monthlyPayment": "Monatliche Rate",
   "interestPaid10Years": "Zinsen (10 Jahre)",
   
   "energyEfficiencyOptions": {

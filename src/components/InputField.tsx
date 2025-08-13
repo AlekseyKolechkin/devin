@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -36,11 +36,45 @@ export default function InputField({
   className = ''
 }: InputFieldProps) {
   const { t } = useTranslation();
+  const [displayValue, setDisplayValue] = useState<string>(value.toString());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = type === 'number' ? parseFloat(e.target.value) || 0 : e.target.value;
-    onChange(newValue);
+    const inputValue = e.target.value;
+    setDisplayValue(inputValue);
+
+    if (type === 'number') {
+      // Allow empty string during editing
+      if (inputValue === '') {
+        return; // Don't call onChange for empty values during editing
+      }
+      const numericValue = parseFloat(inputValue);
+      if (!isNaN(numericValue)) {
+        onChange(numericValue);
+      }
+    } else {
+      onChange(inputValue);
+    }
   };
+
+  const handleBlur = () => {
+    if (type === 'number') {
+      // On blur, if the field is empty or invalid, set it to 0
+      const numericValue = parseFloat(displayValue);
+      if (displayValue === '' || isNaN(numericValue)) {
+        const defaultValue = 0;
+        setDisplayValue(defaultValue.toString());
+        onChange(defaultValue);
+      } else {
+        // Ensure the display value matches the actual value
+        setDisplayValue(numericValue.toString());
+      }
+    }
+  };
+
+  // Update display value when the prop value changes (e.g., from external updates)
+  React.useEffect(() => {
+    setDisplayValue(value.toString());
+  }, [value]);
 
   return (
     <div className={`space-y-2 ${className}`}>
@@ -55,8 +89,9 @@ export default function InputField({
       <Input
         id={id}
         type={type}
-        value={value}
+        value={displayValue}
         onChange={handleChange}
+        onBlur={handleBlur}
         min={min}
         max={max}
         step={step}

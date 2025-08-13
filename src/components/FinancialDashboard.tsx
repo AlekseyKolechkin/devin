@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, AreaChart, Area, Bar, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { PropertyInputs, ResultsData } from '../types/financial';
 import { calculateResults, formatCurrency, formatPercentage, formatNumber } from '../utils/calculations';
 import InputField from './InputField';
@@ -30,7 +30,6 @@ const defaultInputs: PropertyInputs = {
   marginalTaxRate: 42,
   rentGrowthRate: 2.0,
   propertyGrowthRate: 2.5,
-  purchaseDate: new Date().toISOString().split('T')[0],
   hasKfwLoan: false,
   kfwLoanAmount: 0,
   kfwInterestRate: 1.5,
@@ -112,17 +111,31 @@ export default function FinancialDashboard() {
 
   const chartData = useMemo(() => {
     if (!results) return [];
-    return results.yearlyResults.map(year => ({
-      year: year.year,
-      propertyValue: Math.round(year.propertyValue),
-      remainingLoan: Math.round(year.remainingLoan),
-      cashFlow: Math.round(year.cashFlow),
-      cumulativeCashFlow: Math.round(year.cumulativeCashFlow),
-      rentalIncome: Math.round(year.rentalIncome)
-    }));
+    return results.yearlyResults.map(year => {
+      // Calculate loan payments (principal + interest)
+      const loanPayments = year.interestPayment + year.repaymentAmount;
+
+      return {
+        year: year.year,
+        propertyValue: Math.round(year.propertyValue),
+        remainingLoan: Math.round(year.remainingLoan),
+        cashFlow: Math.round(year.cashFlow),
+        cumulativeCashFlow: Math.round(year.cumulativeCashFlow),
+        rentalIncome: Math.round(year.rentalIncome),
+        // Cash flow components for stacked chart
+        income: Math.round(year.rentalIncome),
+        taxBenefit: Math.round(year.taxBenefit),
+        loanPayments: -Math.round(loanPayments), // Negative for expenses
+        operatingExpenses: -Math.round(year.operatingExpenses), // Negative for expenses
+      };
+    });
   }, [results]);
 
-  const locale = i18n.language === 'de' ? 'de-DE' : i18n.language === 'ru' ? 'ru-RU' : 'en-US';
+  const locale = i18n.language === 'de' ? 'de-DE' :
+                 i18n.language === 'ru' ? 'ru-RU' :
+                 i18n.language === 'tr' ? 'tr-TR' :
+                 i18n.language === 'uk' ? 'uk-UA' :
+                 i18n.language === 'ar' ? 'ar-SA' : 'en-US';
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
@@ -209,13 +222,6 @@ export default function FinancialDashboard() {
                   min={0}
                   step={10}
                   info="tooltips.additionalExpenses"
-                />
-                <InputField
-                  id="purchaseDate"
-                  label="purchaseDate"
-                  value={inputs.purchaseDate}
-                  onChange={(value) => updateInput('purchaseDate', value as string)}
-                  type="date"
                 />
               </CardContent>
             </Card>
@@ -599,18 +605,51 @@ export default function FinancialDashboard() {
                     <div>
                       <h3 className="text-lg font-semibold mb-4">{t('annualCashFlows')}</h3>
                       <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={chartData}>
+                        <ComposedChart data={chartData}>
                           <CartesianGrid strokeDasharray="3 3" />
                           <XAxis dataKey="year" />
                           <YAxis tickFormatter={(value) => formatNumber(value, locale)} />
-                          <Tooltip formatter={(value) => formatCurrency(value as number, locale)} />
+                          <Tooltip
+                            formatter={(value, name) => [
+                              formatCurrency(value as number, locale),
+                              name
+                            ]}
+                            labelFormatter={(label) => `${t('year')} ${label}`}
+                          />
                           <Legend />
-                          <Bar 
-                            dataKey="cashFlow" 
-                            fill="#ffc658" 
+                          <Bar
+                            dataKey="income"
+                            stackId="cashflow"
+                            fill="#22c55e"
+                            name={t('rentalIncome')}
+                          />
+                          <Bar
+                            dataKey="taxBenefit"
+                            stackId="cashflow"
+                            fill="#3b82f6"
+                            name={t('taxBenefit')}
+                          />
+                          <Bar
+                            dataKey="loanPayments"
+                            stackId="cashflow"
+                            fill="#ef4444"
+                            name={t('loanPayments')}
+                          />
+                          <Bar
+                            dataKey="operatingExpenses"
+                            stackId="cashflow"
+                            fill="#f97316"
+                            name={t('operatingExpenses')}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="cashFlow"
+                            stroke="#8b5cf6"
+                            strokeWidth={3}
+                            dot={{ fill: "#8b5cf6", strokeWidth: 2, r: 4 }}
                             name={t('cashFlow')}
                           />
-                        </BarChart>
+                        </ComposedChart>
                       </ResponsiveContainer>
                     </div>
 
