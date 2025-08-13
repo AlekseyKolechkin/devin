@@ -3,6 +3,11 @@ export interface PropertyInputs {
   area: number;
   region: string;
   energyEfficiency: string;
+  // Purchase costs
+  grunderwerbsteuer: number; // Real estate transfer tax (read-only, depends on region)
+  notarRate: number; // Notary percentage
+  amtsgerichtRate: number; // Court registration percentage
+  maklerRate: number; // Broker percentage
   coldRent: number; // Kaltmiete
   warmRent: number; // Warmmiete
   additionalExpenses: number;
@@ -70,6 +75,8 @@ export interface ResultsData {
   finalPropertyValue: number;
   totalInterestPaid: number;
   totalTaxBenefits: number;
+  totalPurchaseCosts: number;
+  totalInvestmentCost: number;
   mortgageIndicators: MortgageIndicators;
 }
 

@@ -6,19 +6,23 @@ interface RegionOption {
   label: string;
 }
 
-const berlinDistricts: RegionOption[] = [
-  { value: 'Mitte', label: 'Mitte' },
-  { value: 'Friedrichshain-Kreuzberg', label: 'Friedrichshain-Kreuzberg' },
-  { value: 'Pankow', label: 'Pankow' },
-  { value: 'Charlottenburg-Wilmersdorf', label: 'Charlottenburg-Wilmersdorf' },
-  { value: 'Spandau', label: 'Spandau' },
-  { value: 'Steglitz-Zehlendorf', label: 'Steglitz-Zehlendorf' },
-  { value: 'Tempelhof-Schöneberg', label: 'Tempelhof-Schöneberg' },
-  { value: 'Neukölln', label: 'Neukölln' },
-  { value: 'Treptow-Köpenick', label: 'Treptow-Köpenick' },
-  { value: 'Marzahn-Hellersdorf', label: 'Marzahn-Hellersdorf' },
-  { value: 'Lichtenberg', label: 'Lichtenberg' },
-  { value: 'Reinickendorf', label: 'Reinickendorf' }
+const germanStates: RegionOption[] = [
+  { value: 'Baden-Württemberg', label: 'Baden-Württemberg' },
+  { value: 'Bayern', label: 'Bayern' },
+  { value: 'Berlin', label: 'Berlin' },
+  { value: 'Brandenburg', label: 'Brandenburg' },
+  { value: 'Bremen', label: 'Bremen' },
+  { value: 'Hamburg', label: 'Hamburg' },
+  { value: 'Hessen', label: 'Hessen' },
+  { value: 'Mecklenburg-Vorpommern', label: 'Mecklenburg-Vorpommern' },
+  { value: 'Niedersachsen', label: 'Niedersachsen' },
+  { value: 'Nordrhein-Westfalen', label: 'Nordrhein-Westfalen' },
+  { value: 'Rheinland-Pfalz', label: 'Rheinland-Pfalz' },
+  { value: 'Saarland', label: 'Saarland' },
+  { value: 'Sachsen', label: 'Sachsen' },
+  { value: 'Sachsen-Anhalt', label: 'Sachsen-Anhalt' },
+  { value: 'Schleswig-Holstein', label: 'Schleswig-Holstein' },
+  { value: 'Thüringen', label: 'Thüringen' }
 ];
 
 interface RegionSelectProps {
@@ -40,9 +44,9 @@ export default function RegionSelect({ value, onChange, className = '' }: Region
           <SelectValue placeholder={t('region')} />
         </SelectTrigger>
         <SelectContent>
-          {berlinDistricts.map((district) => (
-            <SelectItem key={district.value} value={district.value}>
-              {t(`berlinDistricts.${district.value}`)}
+          {germanStates.map((state) => (
+            <SelectItem key={state.value} value={state.value}>
+              {t(`germanStates.${state.value}`)}
             </SelectItem>
           ))}
         </SelectContent>

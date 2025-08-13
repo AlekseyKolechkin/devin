@@ -17,6 +17,7 @@ interface InputFieldProps {
   tooltip?: string;
   info?: string;
   required?: boolean;
+  readOnly?: boolean;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ export default function InputField({
   tooltip,
   info,
   required = false,
+  readOnly = false,
   className = ''
 }: InputFieldProps) {
   const { t } = useTranslation();
@@ -95,9 +97,11 @@ export default function InputField({
         min={min}
         max={max}
         step={step}
-        className="w-full"
+        className={`w-full ${readOnly ? 'bg-gray-50' : ''}`}
         title={tooltip ? t(tooltip) : undefined}
         required={required}
+        readOnly={readOnly}
+        disabled={readOnly}
       />
     </div>
   );

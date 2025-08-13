@@ -98,6 +98,10 @@ function calculateTaxBenefit(
 export function calculateResults(inputs: PropertyInputs): ResultsData {
   const {
     purchasePrice,
+    grunderwerbsteuer,
+    notarRate,
+    amtsgerichtRate,
+    maklerRate,
     coldRent,
     additionalExpenses,
     loanAmount,
@@ -126,7 +130,17 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
   
   const totalLoanAmount = loanAmount + (hasKfwLoan ? kfwLoanAmount : 0);
   const totalMonthlyPayment = monthlyPayment + kfwMonthlyPayment;
-  
+
+  // Calculate purchase costs
+  const grunderwerbsteuerAmount = purchasePrice * (grunderwerbsteuer / 100);
+  const notarAmount = purchasePrice * (notarRate / 100);
+  const amtsgerichtAmount = purchasePrice * (amtsgerichtRate / 100);
+  const maklerAmount = purchasePrice * (maklerRate / 100);
+  const totalPurchaseCosts = grunderwerbsteuerAmount + notarAmount + amtsgerichtAmount + maklerAmount;
+
+  // Total investment cost (purchase price + all costs)
+  const totalInvestmentCost = purchasePrice + totalPurchaseCosts;
+
   const annualAfaAmount = purchasePrice * (afaRate / 100);
   const annualSpecialAmortization = purchasePrice * (specialAmortization / 100);
   
@@ -135,7 +149,7 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
   let totalKfwInterestPaid = 0;
   let totalTaxBenefits = 0;
   
-  const initialInvestment = purchasePrice - totalLoanAmount;
+  const initialInvestment = totalInvestmentCost - totalLoanAmount;
   cumulativeCashFlow -= initialInvestment;
   
   const cashFlows: number[] = [-initialInvestment];
@@ -282,6 +296,8 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     finalPropertyValue,
     totalInterestPaid: totalInterestPaidAll,
     totalTaxBenefits,
+    totalPurchaseCosts,
+    totalInvestmentCost,
     mortgageIndicators
   };
 }

@@ -11,12 +11,41 @@ import EnergyEfficiencySlider from './EnergyEfficiencySlider';
 import RegionSelect from './RegionSelect';
 import LanguageSwitcher from './LanguageSwitcher';
 import CashFlowTable from './CashFlowTable';
+import PercentageEuroField from './PercentageEuroField';
+
+// Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
+const getGrunderwerbsteuerRate = (region: string): number => {
+  const rates: { [key: string]: number } = {
+    'Baden-Württemberg': 5.0,
+    'Bayern': 3.5,
+    'Berlin': 6.0,
+    'Brandenburg': 6.5,
+    'Bremen': 5.0,
+    'Hamburg': 4.5,
+    'Hessen': 6.0,
+    'Mecklenburg-Vorpommern': 6.0,
+    'Niedersachsen': 5.0,
+    'Nordrhein-Westfalen': 6.5,
+    'Rheinland-Pfalz': 5.0,
+    'Saarland': 6.5,
+    'Sachsen': 3.5,
+    'Sachsen-Anhalt': 5.0,
+    'Schleswig-Holstein': 6.5,
+    'Thüringen': 6.5
+  };
+  return rates[region] || 5.0; // Default 5% if region not found
+};
 
 const defaultInputs: PropertyInputs = {
   purchasePrice: 300000,
   area: 80,
-  region: 'Mitte',
+  region: 'Berlin',
   energyEfficiency: 'C',
+  // Purchase costs with realistic German rates
+  grunderwerbsteuer: 6.0, // Will be updated based on region
+  notarRate: 1.5, // Notary: typically 1.0-2.0%
+  amtsgerichtRate: 0.5, // Court registration: typically 0.5%
+  maklerRate: 3.57, // Broker: typically 3.57% (including VAT)
   coldRent: 1200,
   warmRent: 1400,
   additionalExpenses: 200,
@@ -72,7 +101,16 @@ export default function FinancialDashboard() {
   }, [inputs]);
 
   const updateInput = (field: keyof PropertyInputs, value: number | string | boolean) => {
-    setInputs(prev => ({ ...prev, [field]: value }));
+    setInputs(prev => {
+      const newInputs = { ...prev, [field]: value };
+
+      // Auto-update Grunderwerbsteuer when region changes
+      if (field === 'region' && typeof value === 'string') {
+        newInputs.grunderwerbsteuer = getGrunderwerbsteuerRate(value);
+      }
+
+      return newInputs;
+    });
   };
 
   const resetInputs = () => {
@@ -191,6 +229,55 @@ export default function FinancialDashboard() {
                   value={inputs.energyEfficiency}
                   onChange={(value: string) => updateInput('energyEfficiency', value)}
                 />
+              </CardContent>
+            </Card>
+
+            {/* Purchase Costs */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('purchaseCosts')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <InputField
+                  id="grunderwerbsteuer"
+                  label="grunderwerbsteuer"
+                  value={inputs.grunderwerbsteuer}
+                  onChange={() => {}} // Read-only field
+                  unit="grunderwerbsteuerUnit"
+                  min={0}
+                  step={0.1}
+                  readOnly={true}
+                />
+                <PercentageEuroField
+                  id="notar"
+                  label="notar"
+                  percentage={inputs.notarRate}
+                  baseAmount={inputs.purchasePrice}
+                  onChange={(value) => updateInput('notarRate', value)}
+                />
+                <PercentageEuroField
+                  id="amtsgericht"
+                  label="amtsgericht"
+                  percentage={inputs.amtsgerichtRate}
+                  baseAmount={inputs.purchasePrice}
+                  onChange={(value) => updateInput('amtsgerichtRate', value)}
+                />
+                <PercentageEuroField
+                  id="makler"
+                  label="makler"
+                  percentage={inputs.maklerRate}
+                  baseAmount={inputs.purchasePrice}
+                  onChange={(value) => updateInput('maklerRate', value)}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Rental Parameters */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('rentalParameters')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 <InputField
                   id="coldRent"
                   label="coldRent"
@@ -504,6 +591,22 @@ export default function FinancialDashboard() {
                         </div>
                         <div className="text-sm text-gray-600 dark:text-gray-300">
                           {t('totalTaxBenefits')}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                          {formatCurrency(results.totalPurchaseCosts, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('totalPurchaseCosts')}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                          {formatCurrency(results.totalInvestmentCost, locale)}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {t('totalInvestmentCost')}
                         </div>
                       </div>
                     </div>
