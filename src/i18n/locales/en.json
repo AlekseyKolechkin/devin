@@ -85,6 +85,7 @@
   "reset": "Reset",
   "export": "Export",
   "import": "Import",
+  "automaticallyCalculated": "Automatically calculated based on federal state",
   
   "validation": {
     "required": "This field is required",
@@ -160,6 +161,7 @@
     "afaRate": "Annual depreciation rate for tax purposes. Standard: 2% (50 years), Old buildings (pre-1925): 2.5%, New buildings (post-2023): 3%",
     "specialAmortization": "Additional accelerated depreciation for energy efficiency or government programs",
     "marginalTaxRate": "Your highest tax bracket rate for calculating tax benefits",
+    "grunderwerbsteuer": "Real estate transfer tax varies by German federal state. Automatically calculated based on selected state (3.5% - 6.5%)",
     "purchasePrice": "Total purchase price of the property including all acquisition costs",
     "area": "Living area of the property in square meters",
     "region": "Select the German federal state where the property is located. Different states may have varying market conditions and regulations",

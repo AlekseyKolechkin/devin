@@ -84,6 +84,7 @@
   "exportData": "Verileri Dışa Aktar",
   "importData": "Verileri İçe Aktar",
   "resetInputs": "Girişleri Sıfırla",
+  "automaticallyCalculated": "Federal eyalete göre otomatik olarak hesaplanır",
   
   "hasKfwLoan": "KfW ile",
   "kfwLoanAmount": "KfW Kredi Tutarı",
@@ -152,6 +153,7 @@
     "afaRate": "Vergi amaçlı yıllık amortisman oranı. Standart: %2 (50 yıl), Eski binalar (1925 öncesi): %2.5, Yeni binalar (2023 sonrası): %3",
     "specialAmortization": "Enerji verimliliği veya devlet programları için ek hızlandırılmış amortisman",
     "marginalTaxRate": "Vergi avantajlarını hesaplamak için en yüksek vergi dilimi oranınız",
+    "grunderwerbsteuer": "Gayrimenkul transfer vergisi Alman federal eyaletlerine göre değişir. Seçilen eyalete göre otomatik olarak hesaplanır (%3,5 - %6,5)",
     "purchasePrice": "Tüm satın alma maliyetleri dahil toplam mülk satın alma fiyatı",
     "area": "Mülkün metrekare cinsinden yaşam alanı",
     "region": "Mülkün bulunduğu Alman federal eyaletini seçin. Farklı eyaletlerde değişen piyasa koşulları ve düzenlemeler olabilir",

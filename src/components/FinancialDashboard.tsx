@@ -13,6 +13,7 @@ import RegionSelect from './RegionSelect';
 import LanguageSwitcher from './LanguageSwitcher';
 import CashFlowTable from './CashFlowTable';
 import PercentageEuroField from './PercentageEuroField';
+import ReadOnlyPercentageEuroField from './ReadOnlyPercentageEuroField';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -245,15 +246,12 @@ export default function FinancialDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <InputField
+                <ReadOnlyPercentageEuroField
                   id="grunderwerbsteuer"
                   label="grunderwerbsteuer"
-                  value={inputs.grunderwerbsteuer}
-                  onChange={() => {}} // Read-only field
-                  unit="grunderwerbsteuerUnit"
-                  min={0}
-                  step={0.1}
-                  readOnly={true}
+                  percentage={inputs.grunderwerbsteuer}
+                  baseAmount={inputs.purchasePrice}
+                  info="tooltips.grunderwerbsteuer"
                 />
                 <PercentageEuroField
                   id="notar"
