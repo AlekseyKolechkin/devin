@@ -1,13 +1,15 @@
 {
-  "name": "devin-user-list",
+  "name": "real-estate-investment-calculator",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -43,6 +45,8 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
+    "i18next": "^25.3.4",
+    "i18next-browser-languagedetector": "^8.2.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.364.0",
     "next-themes": "^0.4.6",
@@ -50,8 +54,9 @@
     "react-day-picker": "^9.8.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.62.0",
+    "react-i18next": "^15.6.1",
     "react-resizable-panels": "^3.0.4",
-    "recharts": "^2.12.4",
+    "recharts": "^2.15.4",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
@@ -68,6 +73,7 @@
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
+    "gh-pages": "^6.1.1",
     "globals": "^15.12.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",

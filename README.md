@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
+# Real Estate Investment Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive real estate investment calculator for the German market with detailed financial analysis, supporting multiple languages.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🏠 **Property Details**: Purchase price, area, federal state, energy efficiency
+- 🧾 **Purchase Costs**: Automatic calculation of German real estate transfer taxes by state
+- 💰 **Rental Parameters**: Cold rent, warm rent, additional expenses
+- 💳 **Loan Parameters**: Main loan and KfW loan support
+- ⚙️ **Tax Settings**: AfA rates, special amortization, marginal tax rates
+- 📈 **Growth Assumptions**: Rent and property value growth projections
+- 🎯 **Key Metrics**: Total return, IRR, cash flow analysis
+- 📊 **Interactive Charts**: Capital growth, cash flow, and cumulative returns
+- 🌍 **Multi-language**: German, English, Russian, Ukrainian, Turkish, Arabic
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React 18** with TypeScript
+- **Vite** for fast development and building
+- **Tailwind CSS** for styling
+- **Recharts** for data visualization
+- **i18next** for internationalization
+- **Lucide React** for icons
 
-- Configure the top-level `parserOptions` property like this:
+## Development
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint code
+npm run lint
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Deployment
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### GitHub Pages (Automatic)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+The project is configured for automatic deployment to GitHub Pages via GitHub Actions:
+
+1. Push to `main` branch
+2. GitHub Actions will automatically build and deploy
+3. Site will be available at:
+   - User/Organization site: `https://username.github.io/`
+   - Project site: `https://username.github.io/repository-name/`
+
+### Manual Deployment
+
+```bash
+# Build and deploy to GitHub Pages
+npm run deploy
 ```
+
+## Configuration
+
+The project automatically detects the correct base URL:
+- Development: `/`
+- Production: Automatically determined based on repository name
+
+This is configured in `vite.config.ts`:
+
+```typescript
+base: process.env.VITE_BASE_URL || '/'
+```
+
+The GitHub Actions workflow automatically sets the correct base URL based on whether it's a user/organization site or a project site.
+
+## License
+
+MIT License
