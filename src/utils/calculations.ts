@@ -1,4 +1,4 @@
-import { PropertyInputs, ResultsData, YearlyResults, MortgageIndicators } from '../types/financial';
+import {MortgageIndicators, PropertyInputs, ResultsData, YearlyResults} from '../types/financial';
 
 function calculateIRR(cashFlows: number[], guess: number = 0.1): number {
   const maxIterations = 100;
@@ -76,8 +76,11 @@ function calculateRemainingLoan(
   return balance;
 }
 
-function calculateRentalIncome(baseRent: number, growthRate: number, year: number): number {
-  return baseRent * Math.pow(1 + growthRate / 100, year - 1);
+function calculateRentalIncome(baseRent: number, stellplatz: number, nebenkostenUml: number, growthRate: number, year: number): number {
+  // Only cold rent and redistributable costs grow with inflation
+  // Stellplatz and non-redistributable costs typically remain fixed
+  const growingIncome = (baseRent + nebenkostenUml) * Math.pow(1 + growthRate / 100, year - 1);
+  return growingIncome + stellplatz;
 }
 
 function calculatePropertyValue(baseValue: number, growthRate: number, year: number): number {
@@ -87,11 +90,11 @@ function calculatePropertyValue(baseValue: number, growthRate: number, year: num
 function calculateTaxBenefit(
   afaAmount: number,
   specialAmortization: number,
-  additionalExpenses: number,
+  operatingExpenses: number,
   interestPayment: number,
   marginalTaxRate: number
 ): number {
-  const totalDeductions = afaAmount + specialAmortization + additionalExpenses + interestPayment;
+  const totalDeductions = afaAmount + specialAmortization + operatingExpenses + interestPayment;
   return totalDeductions * (marginalTaxRate / 100);
 }
 
@@ -104,6 +107,10 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     maklerRate,
     renovation,
     coldRent,
+    stellplatz = 0,
+    nebenkostenUml = 0,
+    nebenkostenNichtUml = 0,
+    verwaltungWhg = 0,
     additionalExpenses,
     loanAmount,
     interestRate,
@@ -159,7 +166,7 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
   const maxLoanTerm = Math.max(loanTerm, hasKfwLoan ? kfwLoanTerm : 0);
 
   for (let year = 1; year <= maxLoanTerm; year++) {
-    const annualRentalIncome = calculateRentalIncome(coldRent * 12, rentGrowthRate, year);
+    const annualRentalIncome = calculateRentalIncome(coldRent * 12, stellplatz * 12, nebenkostenUml * 12, rentGrowthRate, year);
     
     const remainingLoan = calculateRemainingLoan(
       loanAmount,
@@ -213,27 +220,30 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     const currentSpecialAmortization = year <= specialAmortizationYears ? annualSpecialAmortization : 0;
     
     const totalYearlyInterestPayment = yearlyInterestPayment + yearlyKfwInterestPayment;
-    
+
+    // Total operating expenses include: additional expenses, management fees, and non-redistributable costs
+    const totalOperatingExpenses = (additionalExpenses + verwaltungWhg + nebenkostenNichtUml) * 12;
+
     const taxBenefit = calculateTaxBenefit(
       annualAfaAmount,
       currentSpecialAmortization,
-      additionalExpenses * 12,
+      totalOperatingExpenses,
       totalYearlyInterestPayment,
       marginalTaxRate
     );
-    
-    const annualLoanPayment = (year <= loanTerm ? monthlyPayment * 12 : 0) + 
+
+    const annualLoanPayment = (year <= loanTerm ? monthlyPayment * 12 : 0) +
                              (hasKfwLoan && year <= kfwLoanTerm ? kfwMonthlyPayment * 12 : 0);
-    const cashFlow = annualRentalIncome - annualLoanPayment - (additionalExpenses * 12) + taxBenefit;
+    const cashFlow = annualRentalIncome - annualLoanPayment - totalOperatingExpenses + taxBenefit;
     cumulativeCashFlow += cashFlow;
-    
+
     const propertyValue = calculatePropertyValue(purchasePrice, propertyGrowthRate, year);
-    
+
     totalInterestPaid += yearlyInterestPayment;
     totalKfwInterestPaid += yearlyKfwInterestPayment;
     totalTaxBenefits += taxBenefit;
-    
-    const operatingExpenses = additionalExpenses * 12;
+
+    const operatingExpenses = totalOperatingExpenses;
     const netIncomeBeforeDebt = annualRentalIncome - operatingExpenses;
     const taxDepreciation = annualAfaAmount + currentSpecialAmortization;
     const taxableIncome = netIncomeBeforeDebt - totalYearlyInterestPayment - taxDepreciation;
@@ -270,9 +280,8 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
   const finalRemainingLoan = calculateRemainingLoan(loanAmount, monthlyPayment, monthlyInterestRate, loanTerm * 12);
   const finalRemainingKfwLoan = hasKfwLoan ? calculateRemainingLoan(kfwLoanAmount, kfwMonthlyPayment, kfwMonthlyInterestRate, kfwLoanTerm * 12) : 0;
   const totalRemainingLoan = finalRemainingLoan + finalRemainingKfwLoan;
-  
-  const finalCashFlow = cashFlows[cashFlows.length - 1] + finalPropertyValue - totalRemainingLoan;
-  cashFlows[cashFlows.length - 1] = finalCashFlow;
+
+  cashFlows[cashFlows.length - 1] = cashFlows[cashFlows.length - 1] + finalPropertyValue - totalRemainingLoan;
   
   const irr = calculateIRR(cashFlows);
   

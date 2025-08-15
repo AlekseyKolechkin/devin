@@ -10,7 +10,17 @@ export interface PropertyInputs {
   maklerRate: number; // Broker percentage
   renovation: number; // Renovation costs
   coldRent: number; // Kaltmiete
+  coldRentPerSqm: number; // Cold rent per square meter
   warmRent: number; // Warmmiete
+  stellplatz: number; // Parking space rent per month
+
+  // Nebenkosten components (for calculation)
+  nebenkostenUml: number; // Redistributable utility costs (davon uml)
+  nebenkostenNichtUml: number; // Non-redistributable utility costs (davon n. umlf)
+
+  // Management
+  verwaltungWhg: number; // Property management fee
+
   additionalExpenses: number;
   loanAmount: number;
   interestRate: number;

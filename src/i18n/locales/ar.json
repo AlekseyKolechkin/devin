@@ -83,7 +83,23 @@
   "totalReturnAmount": "إجمالي العائد",
   "cashFlowReturn": "عائد التدفق النقدي",
   "propertyAppreciation": "ارتفاع قيمة العقار",
-  
+
+  "stellplatz": "موقف السيارات",
+  "stellplatzUnit": "€",
+  "nebenkostenUml": "التكاليف القابلة للتوزيع",
+  "nebenkostenUmlUnit": "€",
+  "nebenkostenNichtUml": "التكاليف غير القابلة للتوزيع",
+  "nebenkostenNichtUmlUnit": "€",
+  "verwaltungWhg": "إدارة العقارات",
+  "verwaltungWhgUnit": "€",
+  "nebenkostenTotal": "إجمالي المرافق",
+  "mieteTotalKalt": "إجمالي الإيجار البارد",
+  "mieteTotalWarm": "إجمالي الإيجار الدافئ",
+  "mieteTotalNetto": "إجمالي الإيجار الصافي",
+  "nebenkostenDavon": "المرافق (منها)",
+  "totalRents": "إجمالي الإيجارات",
+  "basedOnArea": "بناءً على {{area}}",
+
   "capitalGrowth": "نمو رأس المال",
   "loanReduction": "تخفيض القرض",
   "annualCashFlows": "التدفقات النقدية السنوية",
@@ -106,7 +122,6 @@
   
   "mortgageIndicators": "مؤشرات الرهن العقاري",
   "totalLoanAmount": "إجمالي مبلغ القرض",
-  "monthlyPayment": "الدفعة الشهرية",
   "interestPaid10Years": "الفوائد المدفوعة (10 سنوات)",
   
   "energyEfficiencyOptions": {

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
 import { LineChart, Line, AreaChart, Area, Bar, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3, Wallet, ArrowUpRight, Banknote, Shield, TrendingDown } from 'lucide-react';
+import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3 } from 'lucide-react';
 import { PropertyInputs, ResultsData } from '../types/financial';
 import { calculateResults, formatCurrency, formatPercentage, formatNumber } from '../utils/calculations';
 import InputField from './InputField';
@@ -14,7 +14,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import CashFlowTable from './CashFlowTable';
 import PercentageEuroField from './PercentageEuroField';
 import ReadOnlyPercentageEuroField from './ReadOnlyPercentageEuroField';
-import InfoTooltip from './InfoTooltip';
+import DualEuroSqmField from './DualEuroSqmField';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -51,7 +51,12 @@ const defaultInputs: PropertyInputs = {
   maklerRate: 3.57, // Broker: typically 3.57% (including VAT)
   renovation: 0, // Renovation costs: optional
   coldRent: 1200,
+  coldRentPerSqm: 12.0,
   warmRent: 1400,
+  stellplatz: 50,
+  nebenkostenUml: 150,
+  nebenkostenNichtUml: 50,
+  verwaltungWhg: 50,
   additionalExpenses: 200,
   loanAmount: 240000,
   interestRate: 3.5,
@@ -93,10 +98,14 @@ export default function FinancialDashboard() {
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
+        console.log('Calculating results with inputs:', inputs);
         const calculatedResults = calculateResults(inputs);
+        console.log('Calculated results:', calculatedResults);
         setResults(calculatedResults);
       } catch (error) {
         console.error('Error calculating results:', error);
+        console.error('Error details:', error.message);
+        console.error('Stack trace:', error.stack);
         setResults(null);
       }
     }, 500);
@@ -297,29 +306,83 @@ export default function FinancialDashboard() {
                   {t('rentalParameters')}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <InputField
+              <CardContent className="space-y-6">
+                {/* Kaltmiete - Dual Euro/SQM Field */}
+                <DualEuroSqmField
                   id="coldRent"
                   label="coldRent"
-                  value={inputs.coldRent}
-                  onChange={(value) => updateInput('coldRent', value as number)}
-                  unit="coldRentUnit"
-                  min={0}
-                  step={50}
-                  tooltip="tooltips.coldRent"
+                  euroValue={inputs.coldRent}
+                  sqmValue={inputs.coldRentPerSqm}
+                  area={inputs.area}
+                  onEuroChange={(value) => updateInput('coldRent', value)}
+                  onSqmChange={(value) => updateInput('coldRentPerSqm', value)}
                   info="tooltips.coldRent"
-                />
-                <InputField
-                  id="warmRent"
-                  label="warmRent"
-                  value={inputs.warmRent}
-                  onChange={(value) => updateInput('warmRent', value as number)}
-                  unit="warmRentUnit"
                   min={0}
                   step={50}
-                  tooltip="tooltips.warmRent"
-                  info="tooltips.warmRent"
                 />
+
+                {/* Stellplatz */}
+                <InputField
+                  id="stellplatz"
+                  label="stellplatz"
+                  value={inputs.stellplatz}
+                  onChange={(value) => updateInput('stellplatz', value as number)}
+                  unit="stellplatzUnit"
+                  min={0}
+                  step={10}
+                />
+
+                {/* Nebenkosten Components */}
+                <div className="border border-gray-200 dark:border-gray-700 p-4 rounded-lg">
+                  <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-3">{t('nebenkostenDavon')}</h4>
+                  <div className="space-y-3">
+                    <InputField
+                      id="nebenkostenUml"
+                      label="nebenkostenUml"
+                      value={inputs.nebenkostenUml}
+                      onChange={(value) => updateInput('nebenkostenUml', value as number)}
+                      unit="nebenkostenUmlUnit"
+                      min={0}
+                      step={10}
+                      info="tooltips.nebenkostenUml"
+                    />
+                    <InputField
+                      id="nebenkostenNichtUml"
+                      label="nebenkostenNichtUml"
+                      value={inputs.nebenkostenNichtUml}
+                      onChange={(value) => updateInput('nebenkostenNichtUml', value as number)}
+                      unit="nebenkostenNichtUmlUnit"
+                      min={0}
+                      step={10}
+                      info="tooltips.nebenkostenNichtUml"
+                    />
+                  </div>
+
+                  {/* Calculated Nebenkosten Total */}
+                  <div className="mt-3 p-2 border border-gray-300 dark:border-gray-600 rounded">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('nebenkostenTotal')}:
+                      </span>
+                      <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(inputs.nebenkostenUml + inputs.nebenkostenNichtUml, locale)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Management */}
+                <InputField
+                  id="verwaltungWhg"
+                  label="verwaltungWhg"
+                  value={inputs.verwaltungWhg}
+                  onChange={(value) => updateInput('verwaltungWhg', value as number)}
+                  unit="verwaltungWhgUnit"
+                  min={0}
+                  step={10}
+                />
+
+                {/* Additional Expenses */}
                 <InputField
                   id="additionalExpenses"
                   label="additionalExpenses"
@@ -330,6 +393,34 @@ export default function FinancialDashboard() {
                   step={10}
                   info="tooltips.additionalExpenses"
                 />
+
+                {/* Total Rents - Moved to bottom */}
+                <div className="border border-gray-200 dark:border-gray-700 p-4 rounded-lg space-y-3">
+                  <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-3">{t('totalRents')}</h4>
+
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 border border-gray-200 dark:border-gray-700 rounded">
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{t('mieteTotalKalt')}</div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(inputs.coldRent + inputs.stellplatz, locale)}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center p-3 border border-gray-200 dark:border-gray-700 rounded">
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{t('mieteTotalWarm')}</div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(inputs.coldRent + inputs.stellplatz + inputs.nebenkostenUml + inputs.nebenkostenNichtUml, locale)}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center p-3 border border-gray-200 dark:border-gray-700 rounded">
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{t('mieteTotalNetto')}</div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(inputs.coldRent + inputs.stellplatz + inputs.nebenkostenUml - inputs.verwaltungWhg - inputs.nebenkostenNichtUml - inputs.additionalExpenses, locale)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -565,6 +656,11 @@ export default function FinancialDashboard() {
 
           {/* Results */}
           <div className="lg:col-span-2 space-y-6">
+            {!results && (
+              <div className="text-center p-8">
+                <div className="text-gray-500">Calculating results...</div>
+              </div>
+            )}
             {results && (
               <>
                 {/* Key Metrics */}
@@ -751,7 +847,7 @@ export default function FinancialDashboard() {
                             {/*      {formatCurrency(roe.propertyAppreciation, locale)}*/}
                             {/*    </span>*/}
                             {/*  </div>*/}
-                            {/*</div>*/}
+                            {/*</div>*!/*/}
                           </div>
                         </div>
                       ))}
