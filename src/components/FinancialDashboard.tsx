@@ -20,6 +20,7 @@ import DepreciationTypeSelector from './DepreciationTypeSelector';
 import TaxRateCalculator from './TaxRateCalculator';
 import AdvancedCharts from './AdvancedCharts';
 import SensitivityAnalysis from './SensitivityAnalysis';
+import DetailedKeyMetrics from './DetailedKeyMetrics';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -685,83 +686,12 @@ export default function FinancialDashboard() {
             )}
             {results && (
               <>
-                {/* Key Metrics */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Target className="h-5 w-5 text-red-600" />
-                      {t('keyMetrics')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                          {formatPercentage(results.totalReturn, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalReturn')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                          {formatPercentage(results.irr, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('irr')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                          {formatCurrency(results.totalCashFlow, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalCashFlow')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                          {formatCurrency(results.finalPropertyValue, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('finalPropertyValue')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-red-600 dark:text-red-400">
-                          {formatCurrency(results.totalInterestPaid, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalInterestPaid')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-teal-50 dark:bg-teal-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">
-                          {formatCurrency(results.totalTaxBenefits, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalTaxBenefits')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                          {formatCurrency(results.totalPurchaseCosts, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalPurchaseCosts')}
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                          {formatCurrency(results.totalInvestmentCost, locale)}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-300">
-                          {t('totalInvestmentCost')}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                {/* Detailed Key Metrics */}
+                <DetailedKeyMetrics
+                  results={results}
+                  inputs={inputs}
+                  locale={locale}
+                />
 
                 {/* Mortgage Indicators */}
                 <Card>
