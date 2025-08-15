@@ -98,6 +98,18 @@
   "mieteTotalNetto": "إجمالي الإيجار الصافي",
   "nebenkostenDavon": "المرافق (منها)",
   "totalRents": "إجمالي الإيجارات",
+  "depreciationType": "نوع الاستهلاك",
+  "selectDepreciationType": "اختر نوع الاستهلاك",
+  "manualTaxSettings": "إعدادات الضرائب اليدوية",
+  "depreciationTypes": {
+    "neubau-afa-degr": "مبنى جديد متناقص",
+    "neubau-afa-lin": "مبنى جديد خطي",
+    "neubau-afa-degr-sonder": "مبنى جديد متناقص + خاص",
+    "neubau-afa-lin-sonder": "مبنى جديد خطي + خاص",
+    "bestand-linear": "مبنى موجود خطي",
+    "denkmal": "حماية الآثار",
+    "denkmal-sanierung": "تجديد الآثار"
+  },
   "basedOnArea": "بناءً على {{area}}",
 
   "capitalGrowth": "نمو رأس المال",

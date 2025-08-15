@@ -15,6 +15,8 @@ import CashFlowTable from './CashFlowTable';
 import PercentageEuroField from './PercentageEuroField';
 import ReadOnlyPercentageEuroField from './ReadOnlyPercentageEuroField';
 import DualEuroSqmField from './DualEuroSqmField';
+import DepreciationTypeSelector from './DepreciationTypeSelector';
+import TaxRateCalculator from './TaxRateCalculator';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -62,10 +64,18 @@ const defaultInputs: PropertyInputs = {
   interestRate: 3.5,
   repaymentRate: 2.0,
   loanTerm: 30,
+  depreciationType: 'neubau-afa-lin',
+  manualTaxSettings: false,
   afaRate: 2.0,
   specialAmortization: 0,
   specialAmortizationYears: 0,
+  manualTaxRate: false,
   marginalTaxRate: 42,
+  annualIncome: 80000,
+  maritalStatus: 'single',
+  children: 0,
+  churchTax: false,
+  solidarityTax: true,
   rentGrowthRate: 2.0,
   propertyGrowthRate: 2.5,
   hasKfwLoan: false,
@@ -550,52 +560,46 @@ export default function FinancialDashboard() {
                   {t('taxSettings')}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <InputField
-                  id="afaRate"
-                  label="afaRate"
-                  value={inputs.afaRate}
-                  onChange={(value) => updateInput('afaRate', value as number)}
-                  unit="afaRateUnit"
-                  min={0}
-                  max={10}
-                  step={0.1}
-                  tooltip="tooltips.afaRate"
-                  info="tooltips.afaRate"
+              <CardContent className="space-y-6">
+                <DepreciationTypeSelector
+                  depreciationType={inputs.depreciationType}
+                  manualTaxSettings={inputs.manualTaxSettings}
+                  afaRate={inputs.afaRate}
+                  specialAmortization={inputs.specialAmortization}
+                  specialAmortizationYears={inputs.specialAmortizationYears}
+                  onDepreciationTypeChange={(type) => updateInput('depreciationType', type)}
+                  onManualSettingsChange={(manual) => updateInput('manualTaxSettings', manual)}
+                  onAfaRateChange={(rate) => updateInput('afaRate', rate)}
+                  onSpecialAmortizationChange={(rate) => updateInput('specialAmortization', rate)}
+                  onSpecialAmortizationYearsChange={(years) => updateInput('specialAmortizationYears', years)}
                 />
-                <InputField
-                  id="specialAmortization"
-                  label="specialAmortization"
-                  value={inputs.specialAmortization}
-                  onChange={(value) => updateInput('specialAmortization', value as number)}
-                  unit="specialAmortizationUnit"
-                  min={0}
-                  max={20}
-                  step={0.1}
-                  tooltip="tooltips.specialAmortization"
-                  info="tooltips.specialAmortization"
-                />
-                <InputField
-                  id="specialAmortizationYears"
-                  label="specialAmortizationYears"
-                  value={inputs.specialAmortizationYears}
-                  onChange={(value) => updateInput('specialAmortizationYears', value as number)}
-                  min={0}
-                  max={20}
-                  step={1}
-                  info="tooltips.specialAmortizationYears"
-                />
-                <InputField
-                  id="marginalTaxRate"
-                  label="marginalTaxRate"
-                  value={inputs.marginalTaxRate}
-                  onChange={(value) => updateInput('marginalTaxRate', value as number)}
-                  unit="marginalTaxRateUnit"
-                  min={0}
-                  max={50}
-                  step={1}
-                  tooltip="tooltips.marginalTaxRate"
-                  info="tooltips.marginalTaxRate"
+              </CardContent>
+            </Card>
+
+            {/* Tax Rate Calculator */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-5 w-5 text-purple-600" />
+                  {t('taxRateCalculator')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <TaxRateCalculator
+                  manualTaxRate={inputs.manualTaxRate}
+                  marginalTaxRate={inputs.marginalTaxRate}
+                  annualIncome={inputs.annualIncome}
+                  maritalStatus={inputs.maritalStatus}
+                  children={inputs.children}
+                  churchTax={inputs.churchTax}
+                  solidarityTax={inputs.solidarityTax}
+                  onManualTaxRateChange={(manual) => updateInput('manualTaxRate', manual)}
+                  onMarginalTaxRateChange={(rate) => updateInput('marginalTaxRate', rate)}
+                  onAnnualIncomeChange={(income) => updateInput('annualIncome', income)}
+                  onMaritalStatusChange={(status) => updateInput('maritalStatus', status)}
+                  onChildrenChange={(children) => updateInput('children', children)}
+                  onChurchTaxChange={(churchTax) => updateInput('churchTax', churchTax)}
+                  onSolidarityTaxChange={(solidarityTax) => updateInput('solidarityTax', solidarityTax)}
                 />
               </CardContent>
             </Card>

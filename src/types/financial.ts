@@ -26,10 +26,21 @@ export interface PropertyInputs {
   interestRate: number;
   repaymentRate: number;
   loanTerm: number;
+  // Tax settings
+  depreciationType: string; // Type of depreciation
+  manualTaxSettings: boolean; // Whether to use manual tax settings
   afaRate: number;
   specialAmortization: number;
   specialAmortizationYears: number;
+
+  // Tax rate calculation
+  manualTaxRate: boolean; // Whether to use manual tax rate
   marginalTaxRate: number;
+  annualIncome: number;
+  maritalStatus: string;
+  children: number;
+  churchTax: boolean;
+  solidarityTax: boolean;
   rentGrowthRate: number;
   propertyGrowthRate: number;
   hasKfwLoan: boolean;

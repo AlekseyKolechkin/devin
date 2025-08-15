@@ -87,6 +87,25 @@ function calculatePropertyValue(baseValue: number, growthRate: number, year: num
   return baseValue * Math.pow(1 + growthRate / 100, year - 1);
 }
 
+function calculateAfaAmount(
+  purchasePrice: number,
+  depreciationType: string,
+  afaRate: number,
+  year: number
+): number {
+  // For degressive depreciation types, use different rates for different periods
+  if (depreciationType === 'neubau-afa-degr' || depreciationType === 'neubau-afa-degr-sonder') {
+    if (year <= 8) {
+      return purchasePrice * (4.0 / 100); // 4% for first 8 years
+    } else {
+      return purchasePrice * (2.5 / 100); // 2.5% afterwards
+    }
+  }
+
+  // For linear depreciation, use the standard rate
+  return purchasePrice * (afaRate / 100);
+}
+
 function calculateTaxBenefit(
   afaAmount: number,
   specialAmortization: number,
@@ -116,10 +135,18 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     interestRate,
     repaymentRate,
     loanTerm,
+    depreciationType = 'neubau-afa-lin',
+    manualTaxSettings = false,
     afaRate,
     specialAmortization,
     specialAmortizationYears,
+    manualTaxRate = false,
     marginalTaxRate,
+    annualIncome = 80000,
+    maritalStatus = 'single',
+    children = 0,
+    churchTax = false,
+    solidarityTax = true,
     rentGrowthRate,
     propertyGrowthRate,
     hasKfwLoan,
@@ -151,7 +178,6 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
 
   // AfA (depreciation) is calculated on purchase price only in Germany
   // Renovation costs may be depreciated separately depending on the type of work
-  const annualAfaAmount = purchasePrice * (afaRate / 100);
   const annualSpecialAmortization = purchasePrice * (specialAmortization / 100);
   
   let cumulativeCashFlow = 0;
@@ -218,7 +244,10 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     }
     
     const currentSpecialAmortization = year <= specialAmortizationYears ? annualSpecialAmortization : 0;
-    
+
+    // Calculate AfA amount for this specific year (may vary for degressive depreciation)
+    const annualAfaAmount = calculateAfaAmount(purchasePrice, depreciationType, afaRate, year);
+
     const totalYearlyInterestPayment = yearlyInterestPayment + yearlyKfwInterestPayment;
 
     // Total operating expenses include: additional expenses, management fees, and non-redistributable costs

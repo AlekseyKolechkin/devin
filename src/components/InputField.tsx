@@ -18,6 +18,7 @@ interface InputFieldProps {
   info?: string;
   required?: boolean;
   readOnly?: boolean;
+  disabled?: boolean;
   className?: string;
 }
 
@@ -35,6 +36,7 @@ export default function InputField({
   info,
   required = false,
   readOnly = false,
+  disabled = false,
   className = ''
 }: InputFieldProps) {
   const { t } = useTranslation();
@@ -83,7 +85,6 @@ export default function InputField({
       <Label htmlFor={id} className="text-sm font-medium flex items-center gap-2">
         <span>
           {t(label)}
-          {required && <span className="text-red-500 ml-1">*</span>}
           {unit && <span className="text-gray-500 ml-1">({t(unit)})</span>}
         </span>
         {info && <InfoTooltip content={info} />}
@@ -97,11 +98,11 @@ export default function InputField({
         min={min}
         max={max}
         step={step}
-        className={`w-full ${readOnly ? 'bg-gray-50' : ''}`}
+        className={`w-full ${readOnly || disabled ? 'bg-gray-50' : ''}`}
         title={tooltip ? t(tooltip) : undefined}
         required={required}
         readOnly={readOnly}
-        disabled={readOnly}
+        disabled={readOnly || disabled}
       />
     </div>
   );

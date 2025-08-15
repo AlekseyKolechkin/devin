@@ -98,6 +98,18 @@
   "mieteTotalNetto": "Toplam Net Kira",
   "nebenkostenDavon": "Yan Giderler (bunlardan)",
   "totalRents": "Toplam Kiralar",
+  "depreciationType": "Amortisman Türü",
+  "selectDepreciationType": "Amortisman türünü seçin",
+  "manualTaxSettings": "Manuel vergi ayarları",
+  "depreciationTypes": {
+    "neubau-afa-degr": "Yeni Bina Azalan",
+    "neubau-afa-lin": "Yeni Bina Doğrusal",
+    "neubau-afa-degr-sonder": "Yeni Bina Azalan + Özel",
+    "neubau-afa-lin-sonder": "Yeni Bina Doğrusal + Özel",
+    "bestand-linear": "Mevcut Bina Doğrusal",
+    "denkmal": "Anıt Koruma",
+    "denkmal-sanierung": "Anıt Renovasyon"
+  },
   "basedOnArea": "{{area}} temelinde",
 
   "capitalGrowth": "Sermaye Büyümesi",

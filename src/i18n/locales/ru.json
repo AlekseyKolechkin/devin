@@ -98,6 +98,18 @@
   "mieteTotalNetto": "Общая чистая аренда",
   "nebenkostenDavon": "Коммунальные (из них)",
   "totalRents": "Общие арендные платы",
+  "depreciationType": "Тип амортизации",
+  "selectDepreciationType": "Выберите тип амортизации",
+  "manualTaxSettings": "Ручные налоговые настройки",
+  "depreciationTypes": {
+    "neubau-afa-degr": "Новостройка дегрессивная",
+    "neubau-afa-lin": "Новостройка линейная",
+    "neubau-afa-degr-sonder": "Новостройка дегр. + спец.",
+    "neubau-afa-lin-sonder": "Новостройка лин. + спец.",
+    "bestand-linear": "Существующее здание линейная",
+    "denkmal": "Памятник архитектуры",
+    "denkmal-sanierung": "Реновация памятника"
+  },
   "basedOnArea": "На основе {{area}}",
 
   "capitalGrowth": "Рост капитала",

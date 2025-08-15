@@ -98,6 +98,18 @@
   "mieteTotalNetto": "Загальна чиста оренда",
   "nebenkostenDavon": "Комунальні (з них)",
   "totalRents": "Загальні орендні плати",
+  "depreciationType": "Тип амортизації",
+  "selectDepreciationType": "Оберіть тип амортизації",
+  "manualTaxSettings": "Ручні податкові налаштування",
+  "depreciationTypes": {
+    "neubau-afa-degr": "Новобудова дегресивна",
+    "neubau-afa-lin": "Новобудова лінійна",
+    "neubau-afa-degr-sonder": "Новобудова дегр. + спец.",
+    "neubau-afa-lin-sonder": "Новобудова лін. + спец.",
+    "bestand-linear": "Існуюча будівля лінійна",
+    "denkmal": "Пам'ятка архітектури",
+    "denkmal-sanierung": "Реновація пам'ятки"
+  },
   "basedOnArea": "На основі {{area}}",
 
   "capitalGrowth": "Зростання капіталу",
