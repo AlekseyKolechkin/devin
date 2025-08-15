@@ -48,6 +48,7 @@ const defaultInputs: PropertyInputs = {
   notarRate: 1.5, // Notary: typically 1.0-2.0%
   amtsgerichtRate: 0.5, // Court registration: typically 0.5%
   maklerRate: 3.57, // Broker: typically 3.57% (including VAT)
+  renovation: 0, // Renovation costs: optional
   coldRent: 1200,
   warmRent: 1400,
   additionalExpenses: 200,
@@ -273,6 +274,16 @@ export default function FinancialDashboard() {
                   percentage={inputs.maklerRate}
                   baseAmount={inputs.purchasePrice}
                   onChange={(value) => updateInput('maklerRate', value)}
+                />
+                <InputField
+                  id="renovation"
+                  label="renovation"
+                  value={inputs.renovation}
+                  onChange={(value) => updateInput('renovation', value as number)}
+                  unit="renovationUnit"
+                  min={0}
+                  step={1000}
+                  info="tooltips.renovation"
                 />
               </CardContent>
             </Card>

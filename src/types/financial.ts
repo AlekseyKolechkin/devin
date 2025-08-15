@@ -8,6 +8,7 @@ export interface PropertyInputs {
   notarRate: number; // Notary percentage
   amtsgerichtRate: number; // Court registration percentage
   maklerRate: number; // Broker percentage
+  renovation: number; // Renovation costs
   coldRent: number; // Kaltmiete
   warmRent: number; // Warmmiete
   additionalExpenses: number;

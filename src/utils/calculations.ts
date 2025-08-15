@@ -102,6 +102,7 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     notarRate,
     amtsgerichtRate,
     maklerRate,
+    renovation,
     coldRent,
     additionalExpenses,
     loanAmount,
@@ -136,11 +137,13 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
   const notarAmount = purchasePrice * (notarRate / 100);
   const amtsgerichtAmount = purchasePrice * (amtsgerichtRate / 100);
   const maklerAmount = purchasePrice * (maklerRate / 100);
-  const totalPurchaseCosts = grunderwerbsteuerAmount + notarAmount + amtsgerichtAmount + maklerAmount;
+  const totalPurchaseCosts = grunderwerbsteuerAmount + notarAmount + amtsgerichtAmount + maklerAmount + renovation;
 
   // Total investment cost (purchase price + all costs)
   const totalInvestmentCost = purchasePrice + totalPurchaseCosts;
 
+  // AfA (depreciation) is calculated on purchase price only in Germany
+  // Renovation costs may be depreciated separately depending on the type of work
   const annualAfaAmount = purchasePrice * (afaRate / 100);
   const annualSpecialAmortization = purchasePrice * (specialAmortization / 100);
   

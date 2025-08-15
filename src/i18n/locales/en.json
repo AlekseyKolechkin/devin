@@ -33,6 +33,8 @@
   "amtsgerichtUnit": "%",
   "makler": "Broker Commission",
   "maklerUnit": "%",
+  "renovation": "Renovation Costs",
+  "renovationUnit": "€",
 
   "loanAmount": "Loan Amount",
   "loanAmountUnit": "€",
@@ -162,6 +164,7 @@
     "specialAmortization": "Additional accelerated depreciation for energy efficiency or government programs",
     "marginalTaxRate": "Your highest tax bracket rate for calculating tax benefits",
     "grunderwerbsteuer": "Real estate transfer tax varies by German federal state. Automatically calculated based on selected state (3.5% - 6.5%)",
+    "renovation": "Costs for renovation, modernization, or improvement of the property. These costs increase the total investment amount",
     "purchasePrice": "Total purchase price of the property including all acquisition costs",
     "area": "Living area of the property in square meters",
     "region": "Select the German federal state where the property is located. Different states may have varying market conditions and regulations",

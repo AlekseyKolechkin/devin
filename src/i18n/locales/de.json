@@ -33,6 +33,8 @@
   "amtsgerichtUnit": "%",
   "makler": "Maklerprovision",
   "maklerUnit": "%",
+  "renovation": "Renovierungskosten",
+  "renovationUnit": "€",
 
   "loanAmount": "Darlehenssumme",
   "loanAmountUnit": "€",
@@ -162,6 +164,7 @@
     "specialAmortization": "Zusätzliche beschleunigte Abschreibung für Energieeffizienz oder Förderprogramme",
     "marginalTaxRate": "Ihr höchster Steuersatz zur Berechnung der Steuervorteile",
     "grunderwerbsteuer": "Grunderwerbsteuer variiert je nach deutschem Bundesland. Wird automatisch basierend auf dem gewählten Bundesland berechnet (3,5% - 6,5%)",
+    "renovation": "Kosten für Renovierung, Modernisierung oder Verbesserung der Immobilie. Diese Kosten erhöhen den gesamten Investitionsbetrag",
     "purchasePrice": "Gesamtkaufpreis der Immobilie inklusive aller Erwerbsnebenkosten",
     "area": "Wohnfläche der Immobilie in Quadratmetern",
     "region": "Wählen Sie das deutsche Bundesland, in dem sich die Immobilie befindet. Verschiedene Bundesländer können unterschiedliche Marktbedingungen und Vorschriften haben",
