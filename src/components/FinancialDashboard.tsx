@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
+import { Label } from './ui/label';
 import { LineChart, Line, AreaChart, Area, Bar, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3 } from 'lucide-react';
 import { PropertyInputs, ResultsData } from '../types/financial';
@@ -17,6 +18,8 @@ import ReadOnlyPercentageEuroField from './ReadOnlyPercentageEuroField';
 import DualEuroSqmField from './DualEuroSqmField';
 import DepreciationTypeSelector from './DepreciationTypeSelector';
 import TaxRateCalculator from './TaxRateCalculator';
+import AdvancedCharts from './AdvancedCharts';
+import SensitivityAnalysis from './SensitivityAnalysis';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -46,6 +49,7 @@ const defaultInputs: PropertyInputs = {
   area: 80,
   region: 'Berlin',
   energyEfficiency: 'C',
+  isNewBuilding: false,
   // Purchase costs with realistic German rates
   grunderwerbsteuer: 6.0, // Will be updated based on region
   notarRate: 1.5, // Notary: typically 1.0-2.0%
@@ -255,6 +259,18 @@ export default function FinancialDashboard() {
                   value={inputs.energyEfficiency}
                   onChange={(value: string) => updateInput('energyEfficiency', value)}
                 />
+
+                {/* New Building Checkbox */}
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="isNewBuilding"
+                    checked={inputs.isNewBuilding}
+                    onCheckedChange={(checked) => updateInput('isNewBuilding', checked)}
+                  />
+                  <Label htmlFor="isNewBuilding" className="text-sm text-gray-700 dark:text-gray-300">
+                    {t('isNewBuilding')}
+                  </Label>
+                </div>
               </CardContent>
             </Card>
 
@@ -567,6 +583,8 @@ export default function FinancialDashboard() {
                   afaRate={inputs.afaRate}
                   specialAmortization={inputs.specialAmortization}
                   specialAmortizationYears={inputs.specialAmortizationYears}
+                  isNewBuilding={inputs.isNewBuilding}
+                  energyEfficiency={inputs.energyEfficiency}
                   onDepreciationTypeChange={(type) => updateInput('depreciationType', type)}
                   onManualSettingsChange={(manual) => updateInput('manualTaxSettings', manual)}
                   onAfaRateChange={(rate) => updateInput('afaRate', rate)}
@@ -859,12 +877,25 @@ export default function FinancialDashboard() {
                   </CardContent>
                 </Card>
 
-                {/* Charts */}
+                {/* Advanced Analytics */}
+                <AdvancedCharts
+                  results={results}
+                  inputs={inputs}
+                  locale={locale}
+                />
+
+                {/* Sensitivity Analysis */}
+                <SensitivityAnalysis
+                  inputs={inputs}
+                  locale={locale}
+                />
+
+                {/* Traditional Charts */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <BarChart3 className="h-5 w-5 text-violet-600" />
-                      {t('charts')}
+                      {t('traditionalCharts')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-8">

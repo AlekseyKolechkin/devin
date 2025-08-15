@@ -13,12 +13,27 @@ interface DepreciationTypeConfig {
   description: string;
 }
 
+// Function to determine the best depreciation type based on building characteristics
+function getRecommendedDepreciationType(isNewBuilding: boolean, energyEfficiency: string): string {
+  if (isNewBuilding) {
+    // For new buildings with A+ energy efficiency, use degressive + special depreciation
+    if (energyEfficiency === 'A+') {
+      return 'neubau-afa-degr-sonder';
+    }
+    // For other new buildings, use degressive depreciation
+    return 'neubau-afa-degr';
+  }
+
+  // For existing buildings, use linear depreciation
+  return 'bestand-linear';
+}
+
 const DEPRECIATION_TYPES: Record<string, DepreciationTypeConfig> = {
   'neubau-afa-degr': {
-    afaRate: 4.0, // First 8 years: 4%, then 2.5%
+    afaRate: 5.0, // First 8 years: 5%, then 2.5%
     specialAmortization: 0,
     specialAmortizationYears: 0,
-    description: 'Neubau AfA degr. (4% first 8 years, then 2.5%)'
+    description: 'Neubau AfA degr. (5% first 8 years, then 2.5%)'
   },
   'neubau-afa-lin': {
     afaRate: 2.0, // Linear 2% for 50 years
@@ -27,10 +42,10 @@ const DEPRECIATION_TYPES: Record<string, DepreciationTypeConfig> = {
     description: 'Neubau AfA lin. (2% linear for 50 years)'
   },
   'neubau-afa-degr-sonder': {
-    afaRate: 4.0,
+    afaRate: 5.0,
     specialAmortization: 5.0, // Additional 5% for first 4 years
     specialAmortizationYears: 4,
-    description: 'Neubau AfA degr. + Sonder-AfA (4% + 5% first 4 years)'
+    description: 'Neubau AfA degr. + Sonder-AfA (5% + 5% first 4 years)'
   },
   'neubau-afa-lin-sonder': {
     afaRate: 2.0,
@@ -64,6 +79,8 @@ interface DepreciationTypeSelectorProps {
   afaRate: number;
   specialAmortization: number;
   specialAmortizationYears: number;
+  isNewBuilding: boolean;
+  energyEfficiency: string;
   onDepreciationTypeChange: (type: string) => void;
   onManualSettingsChange: (manual: boolean) => void;
   onAfaRateChange: (rate: number) => void;
@@ -77,6 +94,8 @@ const DepreciationTypeSelector: React.FC<DepreciationTypeSelectorProps> = ({
   afaRate,
   specialAmortization,
   specialAmortizationYears,
+  isNewBuilding,
+  energyEfficiency,
   onDepreciationTypeChange,
   onManualSettingsChange,
   onAfaRateChange,
@@ -84,6 +103,16 @@ const DepreciationTypeSelector: React.FC<DepreciationTypeSelectorProps> = ({
   onSpecialAmortizationYearsChange
 }) => {
   const { t } = useTranslation();
+
+  // Auto-select depreciation type based on building characteristics
+  React.useEffect(() => {
+    if (!manualTaxSettings) {
+      const recommendedType = getRecommendedDepreciationType(isNewBuilding, energyEfficiency);
+      if (recommendedType !== depreciationType) {
+        handleDepreciationTypeChange(recommendedType);
+      }
+    }
+  }, [isNewBuilding, energyEfficiency, manualTaxSettings]);
 
   const handleDepreciationTypeChange = (type: string) => {
     onDepreciationTypeChange(type);

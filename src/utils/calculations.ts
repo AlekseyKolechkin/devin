@@ -96,7 +96,7 @@ function calculateAfaAmount(
   // For degressive depreciation types, use different rates for different periods
   if (depreciationType === 'neubau-afa-degr' || depreciationType === 'neubau-afa-degr-sonder') {
     if (year <= 8) {
-      return purchasePrice * (4.0 / 100); // 4% for first 8 years
+      return purchasePrice * (5.0 / 100); // 5% for first 8 years
     } else {
       return purchasePrice * (2.5 / 100); // 2.5% afterwards
     }

@@ -3,6 +3,7 @@ export interface PropertyInputs {
   area: number;
   region: string;
   energyEfficiency: string;
+  isNewBuilding: boolean;
   // Purchase costs
   grunderwerbsteuer: number; // Real estate transfer tax (read-only, depends on region)
   notarRate: number; // Notary percentage
