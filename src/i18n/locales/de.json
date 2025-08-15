@@ -85,6 +85,7 @@
   "reset": "Zurücksetzen",
   "export": "Exportieren",
   "import": "Importieren",
+  "automaticallyCalculated": "Automatisch berechnet basierend auf Bundesland",
   
   "validation": {
     "required": "Dieses Feld ist erforderlich",
@@ -160,6 +161,7 @@
     "afaRate": "Jährlicher Abschreibungssatz für Steuerzwecke. Standard: 2% (50 Jahre), Altbauten (vor 1925): 2,5%, Neubauten (nach 2023): 3%",
     "specialAmortization": "Zusätzliche beschleunigte Abschreibung für Energieeffizienz oder Förderprogramme",
     "marginalTaxRate": "Ihr höchster Steuersatz zur Berechnung der Steuervorteile",
+    "grunderwerbsteuer": "Grunderwerbsteuer variiert je nach deutschem Bundesland. Wird automatisch basierend auf dem gewählten Bundesland berechnet (3,5% - 6,5%)",
     "purchasePrice": "Gesamtkaufpreis der Immobilie inklusive aller Erwerbsnebenkosten",
     "area": "Wohnfläche der Immobilie in Quadratmetern",
     "region": "Wählen Sie das deutsche Bundesland, in dem sich die Immobilie befindet. Verschiedene Bundesländer können unterschiedliche Marktbedingungen und Vorschriften haben",
