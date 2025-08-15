@@ -291,6 +291,53 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     interestPaid10Years
   };
 
+  // Calculate Return on Equity for specific years
+  const roeYears = [1, 10, 20, 30];
+  const returnOnEquity: ReturnOnEquity[] = roeYears.map(targetYear => {
+    const yearData = yearlyResults.find(y => y.year === targetYear);
+
+    if (!yearData) {
+      return {
+        year: targetYear,
+        roe: 0,
+        equity: 0,
+        totalReturn: 0,
+        cashFlowReturn: 0,
+        taxBenefits: 0,
+        propertyAppreciation: 0
+      };
+    }
+
+    const equity = yearData.equity;
+    const propertyValue = yearData.propertyValue;
+    const propertyAppreciation = propertyValue - purchasePrice;
+
+    // Calculate cumulative cash flow and tax benefits up to this year
+    const cumulativeCashFlowToYear = yearlyResults
+      .filter(y => y.year <= targetYear)
+      .reduce((sum, y) => sum + y.cashFlow, 0);
+
+    const cumulativeTaxBenefitsToYear = yearlyResults
+      .filter(y => y.year <= targetYear)
+      .reduce((sum, y) => sum + y.taxBenefit, 0);
+
+    // Total return = cash flow + tax benefits + property appreciation
+    const totalReturnAmount = cumulativeCashFlowToYear + cumulativeTaxBenefitsToYear + propertyAppreciation;
+
+    // ROE = Total return / Initial equity investment
+    const roe = initialInvestment > 0 ? (totalReturnAmount / initialInvestment) * 100 : 0;
+
+    return {
+      year: targetYear,
+      roe,
+      equity,
+      totalReturn: totalReturnAmount,
+      cashFlowReturn: cumulativeCashFlowToYear,
+      taxBenefits: cumulativeTaxBenefitsToYear,
+      propertyAppreciation
+    };
+  });
+
   return {
     yearlyResults,
     totalReturn,
@@ -301,6 +348,7 @@ export function calculateResults(inputs: PropertyInputs): ResultsData {
     totalTaxBenefits,
     totalPurchaseCosts,
     totalInvestmentCost,
+    returnOnEquity,
     mortgageIndicators
   };
 }

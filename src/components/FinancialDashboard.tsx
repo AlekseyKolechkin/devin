@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
 import { LineChart, Line, AreaChart, Area, Bar, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3 } from 'lucide-react';
+import { Home, Receipt, DollarSign, CreditCard, Settings, TrendingUp, Target, Building, BarChart3, Wallet, ArrowUpRight, Banknote, Shield, TrendingDown } from 'lucide-react';
 import { PropertyInputs, ResultsData } from '../types/financial';
 import { calculateResults, formatCurrency, formatPercentage, formatNumber } from '../utils/calculations';
 import InputField from './InputField';
@@ -14,6 +14,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import CashFlowTable from './CashFlowTable';
 import PercentageEuroField from './PercentageEuroField';
 import ReadOnlyPercentageEuroField from './ReadOnlyPercentageEuroField';
+import InfoTooltip from './InfoTooltip';
 
 // Real estate transfer tax rates by German federal state (Grunderwerbsteuer)
 const getGrunderwerbsteuerRate = (region: string): number => {
@@ -686,6 +687,74 @@ export default function FinancialDashboard() {
                           {t('interestPaid10Years')}
                         </div>
                       </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Return on Equity */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5 text-emerald-600" />
+                      {t('returnOnEquity')}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {results.returnOnEquity.map((roe) => (
+                        <div key={roe.year} className="bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg p-4 border border-emerald-200 dark:border-emerald-800">
+                          <div className="text-center">
+                            <div className="text-lg font-semibold text-emerald-700 dark:text-emerald-300 mb-2">
+                              {t('roeYear', { year: roe.year })}
+                            </div>
+                            <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-3">
+                              {formatPercentage(roe.roe, locale)}
+                            </div>
+                            {/*<div className="grid grid-cols-2 gap-2 text-xs">*/}
+                            {/*  <div className="flex items-center justify-between bg-white/50 dark:bg-gray-800/50 rounded px-2 py-1">*/}
+                            {/*    <InfoTooltip content={t('equity')}>*/}
+                            {/*      <Wallet className="h-3 w-3 text-blue-500" />*/}
+                            {/*    </InfoTooltip>*/}
+                            {/*    <span className="font-medium text-gray-700 dark:text-gray-300">*/}
+                            {/*      {formatCurrency(roe.equity, locale)}*/}
+                            {/*    </span>*/}
+                            {/*  </div>*/}
+                            {/*  <div className="flex items-center justify-between bg-white/50 dark:bg-gray-800/50 rounded px-2 py-1">*/}
+                            {/*    <InfoTooltip content={t('totalReturnAmount')}>*/}
+                            {/*      <ArrowUpRight className="h-3 w-3 text-green-500" />*/}
+                            {/*    </InfoTooltip>*/}
+                            {/*    <span className="font-medium text-gray-700 dark:text-gray-300">*/}
+                            {/*      {formatCurrency(roe.totalReturn, locale)}*/}
+                            {/*    </span>*/}
+                            {/*  </div>*/}
+                            {/*  <div className="flex items-center justify-between bg-white/50 dark:bg-gray-800/50 rounded px-2 py-1">*/}
+                            {/*    <InfoTooltip content={t('cashFlowReturn')}>*/}
+                            {/*      <Banknote className="h-3 w-3 text-emerald-500" />*/}
+                            {/*    </InfoTooltip>*/}
+                            {/*    <span className="font-medium text-gray-700 dark:text-gray-300">*/}
+                            {/*      {formatCurrency(roe.cashFlowReturn, locale)}*/}
+                            {/*    </span>*/}
+                            {/*  </div>*/}
+                            {/*  <div className="flex items-center justify-between bg-white/50 dark:bg-gray-800/50 rounded px-2 py-1">*/}
+                            {/*    <InfoTooltip content={t('totalTaxBenefits')}>*/}
+                            {/*      <Shield className="h-3 w-3 text-purple-500" />*/}
+                            {/*    </InfoTooltip>*/}
+                            {/*    <span className="font-medium text-gray-700 dark:text-gray-300">*/}
+                            {/*      {formatCurrency(roe.taxBenefits, locale)}*/}
+                            {/*    </span>*/}
+                            {/*  </div>*/}
+                            {/*  <div className="flex items-center justify-between bg-white/50 dark:bg-gray-800/50 rounded px-2 py-1 col-span-2">*/}
+                            {/*    <InfoTooltip content={t('propertyAppreciation')}>*/}
+                            {/*      <TrendingUp className="h-3 w-3 text-orange-500" />*/}
+                            {/*    </InfoTooltip>*/}
+                            {/*    <span className="font-medium text-gray-700 dark:text-gray-300">*/}
+                            {/*      {formatCurrency(roe.propertyAppreciation, locale)}*/}
+                            {/*    </span>*/}
+                            {/*  </div>*/}
+                            {/*</div>*/}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>

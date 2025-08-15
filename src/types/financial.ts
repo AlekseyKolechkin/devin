@@ -68,6 +68,16 @@ export interface RegionOption {
   label: string;
 }
 
+export interface ReturnOnEquity {
+  year: number;
+  roe: number;
+  equity: number;
+  totalReturn: number;
+  cashFlowReturn: number;
+  taxBenefits: number;
+  propertyAppreciation: number;
+}
+
 export interface ResultsData {
   yearlyResults: YearlyResults[];
   totalReturn: number;
@@ -78,6 +88,7 @@ export interface ResultsData {
   totalTaxBenefits: number;
   totalPurchaseCosts: number;
   totalInvestmentCost: number;
+  returnOnEquity: ReturnOnEquity[];
   mortgageIndicators: MortgageIndicators;
 }
 
